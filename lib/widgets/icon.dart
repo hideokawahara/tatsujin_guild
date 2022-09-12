@@ -33,3 +33,19 @@ class BottomMyPageIcon extends StatelessWidget {
     );
   }
 }
+
+class ForwardArrowIcon extends StatelessWidget {
+  const ForwardArrowIcon({
+    Key? key,
+    this.color,
+  }) : super(key: key);
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.arrow_forward_ios,
+      color: color ?? Colors.black,
+    );
+  }
+}
