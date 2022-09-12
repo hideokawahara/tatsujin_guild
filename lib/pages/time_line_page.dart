@@ -27,7 +27,7 @@ class TimeLinePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: AppColors.defaultBackGroundColor,
             title: const Text(
-              'TATSUJINランキング',
+              'TATSUJINランキング\n前回のお題：駄洒落',
               style: AppStyles.headStyle,
             ),
             leading: InkWell(
@@ -57,8 +57,8 @@ class TimeLinePage extends StatelessWidget {
           ),
           body: const TabBarView(
             children: [
-              TimeLinePageBody(),
-              TimeLinePageBody(),
+              RankingPageBody(),
+              RankingPageBody(),
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -74,8 +74,8 @@ class TimeLinePage extends StatelessWidget {
   }
 }
 
-class TimeLinePageBody extends StatelessWidget {
-  const TimeLinePageBody({Key? key}) : super(key: key);
+class RankingPageBody extends StatelessWidget {
+  const RankingPageBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
