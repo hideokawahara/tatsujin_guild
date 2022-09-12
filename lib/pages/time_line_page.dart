@@ -58,7 +58,7 @@ class TimeLinePage extends StatelessWidget {
           body: const TabBarView(
             children: [
               RankingPageBody(),
-              RankingPageBody(),
+              TimeLinePageBody(),
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -106,6 +106,48 @@ class RankingPageBody extends StatelessWidget {
           },
           shrinkWrap: true,
         );
+      },
+    );
+  }
+}
+
+class TimeLinePageBody extends StatelessWidget {
+  const TimeLinePageBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<TimeLineViewModel>(
+      builder: (context, timeLineModel, child) {
+        if (timeLineModel.rankingList.isEmpty) {
+          return const Center(
+            child: Text('投稿がありません'),
+          );
+        } else {
+          return ListView.builder(
+            clipBehavior: Clip.none,
+            // scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            itemCount: timeLineModel.rankingList.length,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext listContext, int index) {
+              int rank = index + 1;
+              return Container(
+                height: 200,
+                margin: const EdgeInsets.only(
+                  bottom: 16,
+                ),
+                child: HomePostCard(
+                  rank: rank,
+                  likesCounts: 1000,
+                  contents: timeLineModel.rankingList[index],
+                  authorImage:
+                      'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
+                  authorName: '投稿者',
+                ),
+              );
+            },
+          );
+        }
       },
     );
   }
