@@ -20,22 +20,55 @@ class TimeLinePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TimeLineViewModel(),
-      child: Scaffold(
-        backgroundColor: AppColors.defaultBackGroundColor,
-        appBar: AppBar(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
           backgroundColor: AppColors.defaultBackGroundColor,
-          title: const Text(
-            'TATSUJINランキング',
-            style: AppStyles.headStyle,
+          appBar: AppBar(
+            backgroundColor: AppColors.defaultBackGroundColor,
+            title: const Text(
+              'TATSUJINランキング',
+              style: AppStyles.headStyle,
+            ),
+            leading: InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: const BackArrowIcon(),
+            ),
+            bottom: const TabBar(
+              unselectedLabelColor: Colors.grey,
+              labelColor: Colors.black,
+              tabs: [
+                Tab(
+                  icon: Icon(
+                    Icons.wine_bar_sharp,
+                    // color: Colors.black,
+                  ),
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.run_circle,
+                    // color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
           ),
-          leading: InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: const BackArrowIcon(),
+          body: const TabBarView(
+            children: [
+              TimeLinePageBody(),
+              TimeLinePageBody(),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black12,
+            child: const Icon(
+              Icons.add,
+            ),
+            onPressed: () {},
           ),
         ),
-        body: const TimeLinePageBody(),
       ),
     );
   }
