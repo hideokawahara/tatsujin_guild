@@ -8,20 +8,23 @@ import 'package:tatsujin_guild/pages/home_page.dart';
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 
+//Widgets
+import 'package:tatsujin_guild/widgets/icon.dart';
+
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
 
   final Map<Widget, BottomNavigationBarItem> contents = {
     const HomePage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: BottomHomeIcon(),
       label: 'ホーム',
     ),
     const Text('投稿'): const BottomNavigationBarItem(
-      icon: Icon(Icons.favorite),
+      icon: BottomPostIcon(),
       label: '投稿',
     ),
     const Text('マイページ'): const BottomNavigationBarItem(
-      icon: Icon(Icons.person),
+      icon: BottomMyPageIcon(),
       label: 'マイページ',
     ),
   };
