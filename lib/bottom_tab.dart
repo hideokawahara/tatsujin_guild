@@ -1,11 +1,18 @@
+//Packages
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+//Pages
+import 'package:tatsujin_guild/pages/home_page.dart';
+
+//Resources
+import 'package:tatsujin_guild/resources/app_colors.dart';
 
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
 
   final Map<Widget, BottomNavigationBarItem> contents = {
-    const Text('ホーム'): const BottomNavigationBarItem(
+    const HomePage(): const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'ホーム',
     ),
@@ -34,9 +41,9 @@ class BottomTab extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: tabItems,
-        activeColor: Colors.black,
-        inactiveColor: Colors.grey,
-        backgroundColor: Colors.white,
+        activeColor: AppColors.defaultActiveColor,
+        inactiveColor: AppColors.defaultInactiveColor,
+        backgroundColor: AppColors.defaultBackGroundColor,
         // 追加したプロパティを記述する
         height: 66,
       ),
