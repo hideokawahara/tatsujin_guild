@@ -2,8 +2,14 @@
 import 'package:flutter/material.dart';
 
 class AppStyles {
+  static const titleStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
   static const headStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
+    color: Colors.black,
   );
 }

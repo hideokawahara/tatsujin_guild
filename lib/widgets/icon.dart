@@ -49,3 +49,19 @@ class ForwardArrowIcon extends StatelessWidget {
     );
   }
 }
+
+class BackArrowIcon extends StatelessWidget {
+  const BackArrowIcon({
+    Key? key,
+    this.color,
+  }) : super(key: key);
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.arrow_back_ios_rounded,
+      color: color ?? Colors.black,
+    );
+  }
+}

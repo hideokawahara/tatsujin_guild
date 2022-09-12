@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Pages
+import 'package:tatsujin_guild/pages/time_line_page.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
@@ -63,7 +66,13 @@ class HomePageBody extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const TimeLinePage(),
+              ),
+            );
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
