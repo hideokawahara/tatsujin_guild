@@ -97,11 +97,10 @@ class RankingPageBody extends StatelessWidget {
             int rank = index + 1;
             return HomePostCard(
               rank: rank,
-              likesCounts: 1000,
-              contents: timeLineModel.rankingList[index],
-              authorImage:
-                  'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
-              authorName: '投稿者',
+              likesCounts: timeLineModel.rankingList[index].likesCounts,
+              contents: timeLineModel.rankingList[index].contents,
+              authorImage: timeLineModel.rankingList[index].authorImage,
+              authorName: timeLineModel.rankingList[index].authorName,
             );
           },
           shrinkWrap: true,
@@ -138,11 +137,10 @@ class TimeLinePageBody extends StatelessWidget {
                 ),
                 child: HomePostCard(
                   rank: rank,
-                  likesCounts: 1000,
-                  contents: timeLineModel.rankingList[index],
-                  authorImage:
-                      'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
-                  authorName: '投稿者',
+                  likesCounts: timeLineModel.rankingList[index].likesCounts,
+                  contents: timeLineModel.rankingList[index].contents,
+                  authorImage: timeLineModel.rankingList[index].authorImage,
+                  authorName: timeLineModel.rankingList[index].authorName,
                 ),
               );
             },
