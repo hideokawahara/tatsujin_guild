@@ -109,15 +109,16 @@ class HomePostCard extends StatelessWidget {
   }
 }
 
-class TimeLinePostcard extends StatelessWidget {
+class TimeLinePostcard extends StatefulWidget {
   const TimeLinePostcard({
     Key? key,
     // required this.rank,
-    this.isShow = false,
+    required this.isShow,
     required this.likesCounts,
     required this.contents,
     required this.authorImage,
     required this.authorName,
+    required this.addLikeCallback,
   }) : super(key: key);
   // final int rank;
   final bool isShow;
@@ -125,7 +126,14 @@ class TimeLinePostcard extends StatelessWidget {
   final String contents;
   final String authorImage;
   final String authorName;
+  final void Function() addLikeCallback;
 
+  @override
+  State<TimeLinePostcard> createState() => _TimeLinePostcardState();
+}
+
+class _TimeLinePostcardState extends State<TimeLinePostcard> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -150,7 +158,7 @@ class TimeLinePostcard extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              contents,
+              widget.contents,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -164,11 +172,11 @@ class TimeLinePostcard extends StatelessWidget {
             onTap: () {},
             child: Row(
               children: [
-                isShow
+                widget.isShow
                     ? CircleAvatar(
                         //Todo: image networkを差し替える
                         backgroundImage: Image.network(
-                          authorImage,
+                          widget.authorImage,
                           fit: BoxFit.cover,
                         ).image,
                       )
@@ -188,9 +196,9 @@ class TimeLinePostcard extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                isShow
+                widget.isShow
                     ? Text(
-                        authorName,
+                        widget.authorName,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -204,7 +212,7 @@ class TimeLinePostcard extends StatelessWidget {
                         ),
                       ),
                 const Spacer(),
-                isShow
+                widget.isShow
                     ? Row(
                         children: [
                           const Icon(
@@ -212,7 +220,7 @@ class TimeLinePostcard extends StatelessWidget {
                             color: Colors.redAccent,
                           ),
                           Text(
-                            '$likesCounts',
+                            '${widget.likesCounts}',
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -221,9 +229,22 @@ class TimeLinePostcard extends StatelessWidget {
                           ),
                         ],
                       )
-                    : const Icon(
-                        Icons.favorite_border,
-                      ),
+                    : isFavorite
+                        ? const Icon(
+                            Icons.favorite_rounded,
+                            color: Colors.redAccent,
+                          )
+                        : InkWell(
+                            onTap: () {
+                              widget.addLikeCallback();
+                              setState(() {
+                                isFavorite = true;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.favorite_border,
+                            ),
+                          ),
               ],
             ),
           ),

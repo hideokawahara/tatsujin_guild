@@ -14,6 +14,21 @@ class TimeLineViewModel extends ChangeNotifier {
   List<Post> get timeLineList {
     return [..._timeLineList];
   }
+
+  int _likeCounter = 0;
+  int get likeCounter {
+    return _likeCounter;
+  }
+
+  bool isShow = false;
+
+  void addLikeCounter() {
+    _likeCounter++;
+    if (_likeCounter == 5) {
+      isShow = true;
+    }
+    notifyListeners();
+  }
 }
 
 List<Post> _dummyPostList = [

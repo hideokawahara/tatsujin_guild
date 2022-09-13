@@ -140,6 +140,10 @@ class TimeLinePageBody extends StatelessWidget {
                   contents: timeLineModel.timeLineList[index].contents,
                   authorImage: timeLineModel.timeLineList[index].authorImage,
                   authorName: timeLineModel.timeLineList[index].authorName,
+                  isShow: timeLineModel.isShow,
+                  addLikeCallback: () {
+                    timeLineModel.addLikeCounter();
+                  },
                 ),
               );
             },
