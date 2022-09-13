@@ -61,12 +61,26 @@ class TimeLinePage extends StatelessWidget {
               TimeLinePageBody(),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.black12,
-            child: const Icon(
-              Icons.add,
-            ),
-            onPressed: () {},
+          floatingActionButton: Consumer<TimeLineViewModel>(
+            builder: (context, timeLineModel, child) {
+              if (timeLineModel.isShow) {
+                return FloatingActionButton(
+                  backgroundColor: Colors.redAccent,
+                  child: const Icon(
+                    Icons.add,
+                  ),
+                  onPressed: () {},
+                );
+              } else {
+                return FloatingActionButton(
+                  backgroundColor: Colors.black12,
+                  child: const Icon(
+                    Icons.close,
+                  ),
+                  onPressed: () {},
+                );
+              }
+            },
           ),
         ),
       ),

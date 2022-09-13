@@ -24,7 +24,7 @@ class TimeLineViewModel extends ChangeNotifier {
 
   void addLikeCounter() {
     _likeCounter++;
-    if (_likeCounter == 5) {
+    if (_likeCounter == 3) {
       isShow = true;
     }
     notifyListeners();
