@@ -9,6 +9,7 @@ class HomePostCard extends StatelessWidget {
     required this.contents,
     required this.authorImage,
     required this.authorName,
+    this.margin,
     // required this.authorAge,
   }) : super(key: key);
   final int rank;
@@ -16,13 +17,14 @@ class HomePostCard extends StatelessWidget {
   final String contents;
   final String authorImage;
   final String authorName;
+  final EdgeInsetsGeometry? margin;
   // final int authorAge;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
-      margin: const EdgeInsets.only(right: 16),
+      margin: margin,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,

@@ -89,8 +89,8 @@ class RankingPageBody extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 24,
-            crossAxisSpacing: 8,
-            mainAxisExtent: 280,
+            crossAxisSpacing: 16,
+            mainAxisExtent: 240,
           ),
           itemCount: timeLineModel.rankingList.length,
           itemBuilder: (context, index) {

@@ -119,6 +119,9 @@ class HomePageBody extends StatelessWidget {
                       authorImage:
                           'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
                       authorName: '投稿者',
+                      margin: const EdgeInsets.only(
+                        right: 16,
+                      ),
                     );
                   },
                 );
