@@ -117,7 +117,7 @@ class TimeLinePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TimeLineViewModel>(
       builder: (context, timeLineModel, child) {
-        if (timeLineModel.rankingList.isEmpty) {
+        if (timeLineModel.timeLineList.isEmpty) {
           return const Center(
             child: Text('投稿がありません'),
           );
@@ -126,21 +126,20 @@ class TimeLinePageBody extends StatelessWidget {
             clipBehavior: Clip.none,
             // scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            itemCount: timeLineModel.rankingList.length,
+            itemCount: timeLineModel.timeLineList.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext listContext, int index) {
-              int rank = index + 1;
               return Container(
                 height: 200,
                 margin: const EdgeInsets.only(
                   bottom: 16,
                 ),
-                child: HomePostCard(
-                  rank: rank,
-                  likesCounts: timeLineModel.rankingList[index].likesCounts,
-                  contents: timeLineModel.rankingList[index].contents,
-                  authorImage: timeLineModel.rankingList[index].authorImage,
-                  authorName: timeLineModel.rankingList[index].authorName,
+                child: TimeLinePostcard(
+                  // rank: rank,
+                  likesCounts: timeLineModel.timeLineList[index].likesCounts,
+                  contents: timeLineModel.timeLineList[index].contents,
+                  authorImage: timeLineModel.timeLineList[index].authorImage,
+                  authorName: timeLineModel.timeLineList[index].authorName,
                 ),
               );
             },
