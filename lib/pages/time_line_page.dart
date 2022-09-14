@@ -28,7 +28,7 @@ class TimeLinePage extends StatelessWidget {
             backgroundColor: AppColors.defaultBackGroundColor,
             title: const Text(
               'TATSUJINランキング\n前回のお題：駄洒落',
-              style: AppStyles.headStyle,
+              style: AppStyles.titleStyle,
             ),
             leading: InkWell(
               onTap: () {
