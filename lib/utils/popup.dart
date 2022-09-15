@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:tatsujin_guild/utils/progress_function.dart';
 import 'dialog.dart';
 
-Future<bool> showRemoveFavoritePopup({
+Future<bool> showDeletePopup({
   required BuildContext context,
   required String messageText,
   required String deleteText,

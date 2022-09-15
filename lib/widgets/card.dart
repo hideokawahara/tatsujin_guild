@@ -316,7 +316,7 @@ class FavoritePostcard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () async {
-                  bool result = await showRemoveFavoritePopup(
+                  bool result = await showDeletePopup(
                     context: context,
                     messageText: 'お気に入りから削除しますか？',
                     deleteText: '削除する',
@@ -432,7 +432,7 @@ class MyPostcard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () async {
-                  bool result = await showRemoveFavoritePopup(
+                  bool result = await showDeletePopup(
                     context: context,
                     messageText: '投稿を削除しますか？',
                     deleteText: '削除する',
