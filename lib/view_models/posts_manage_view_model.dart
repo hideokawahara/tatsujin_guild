@@ -10,7 +10,7 @@ class PostsManageViewModel extends ChangeNotifier {
     return [..._postList];
   }
 
-  final List<Post> _favoriteList = _dummyPostList;
+  final List<Post> _favoriteList = _dummyPostList2;
   List<Post> get favoriteList {
     return [..._favoriteList];
   }

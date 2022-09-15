@@ -65,3 +65,14 @@ class BackArrowIcon extends StatelessWidget {
     );
   }
 }
+
+class MoreHorizIcon extends StatelessWidget {
+  const MoreHorizIcon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.more_horiz,
+    );
+  }
+}

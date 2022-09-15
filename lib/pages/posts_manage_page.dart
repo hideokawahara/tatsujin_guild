@@ -51,7 +51,7 @@ class PostsManagePage extends StatelessWidget {
           body: const TabBarView(
             children: [
               PostsManagePageBody(),
-              PostsManagePageBody(),
+              FavoritePostsPageBody(),
             ],
           ),
         ),
@@ -95,6 +95,41 @@ class PostsManagePageBody extends StatelessWidget {
                     // timeLineModel.addLikeCounter();
                   },
                 ),
+              );
+            },
+          );
+        }
+      },
+    );
+  }
+}
+
+class FavoritePostsPageBody extends StatelessWidget {
+  const FavoritePostsPageBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<PostsManageViewModel>(
+      builder: (context, timeLineModel, child) {
+        if (timeLineModel.favoriteList.isEmpty) {
+          return const Center(
+            child: Text('お気に入りの投稿がありません'),
+          );
+        } else {
+          return ListView.builder(
+            clipBehavior: Clip.none,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            itemCount: timeLineModel.favoriteList.length,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext listContext, int index) {
+              return FavoritePostcard(
+                likesCounts: timeLineModel.favoriteList[index].likesCounts,
+                contents: timeLineModel.favoriteList[index].contents,
+                authorImage: timeLineModel.favoriteList[index].authorImage,
+                authorName: timeLineModel.favoriteList[index].authorName,
+                removeLikeCallback: () {
+                  // timeLineModel.addLikeCounter();
+                },
               );
             },
           );
