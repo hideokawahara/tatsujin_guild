@@ -79,22 +79,13 @@ class PostsManagePageBody extends StatelessWidget {
             itemCount: timeLineModel.postList.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext listContext, int index) {
-              return Container(
-                height: 200,
-                margin: const EdgeInsets.only(
-                  bottom: 16,
-                ),
-                child: TimeLinePostcard(
-                  // rank: rank,
-                  likesCounts: timeLineModel.postList[index].likesCounts,
-                  contents: timeLineModel.postList[index].contents,
-                  authorImage: timeLineModel.postList[index].authorImage,
-                  authorName: timeLineModel.postList[index].authorName,
-                  isShow: true,
-                  addLikeCallback: () {
-                    // timeLineModel.addLikeCounter();
-                  },
-                ),
+              return MyPostcard(
+                likesCounts: timeLineModel.postList[index].likesCounts,
+                contents: timeLineModel.postList[index].contents,
+                deletePostCallback: () async {
+                  await Future.delayed(Duration(milliseconds: 1000));
+                  return true;
+                },
               );
             },
           );

@@ -318,6 +318,9 @@ class FavoritePostcard extends StatelessWidget {
                 onPressed: () async {
                   bool result = await showRemoveFavoritePopup(
                     context: context,
+                    messageText: 'お気に入りから削除しますか？',
+                    deleteText: '削除する',
+                    cancelText: 'キャンセル',
                     removeFavoriteCallback: () async {
                       await Future.delayed(Duration(milliseconds: 1000));
                       return true;
@@ -367,6 +370,98 @@ class FavoritePostcard extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyPostcard extends StatelessWidget {
+  const MyPostcard({
+    Key? key,
+    required this.likesCounts,
+    required this.contents,
+    required this.deletePostCallback,
+  }) : super(key: key);
+  final int likesCounts;
+  final String contents;
+  final Future<bool> Function() deletePostCallback;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      height: 200,
+      margin: const EdgeInsets.only(
+        bottom: 16,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(color: Colors.black12),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            spreadRadius: 1.0,
+            blurRadius: 10.0,
+            offset: Offset(10, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Text(
+                  contents,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    //Todo: fontを追加する
+                    // fontFamily: 'Shippori_Antique',
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () async {
+                  bool result = await showRemoveFavoritePopup(
+                    context: context,
+                    messageText: '投稿を削除しますか？',
+                    deleteText: '削除する',
+                    cancelText: 'キャンセル',
+                    removeFavoriteCallback: deletePostCallback,
+                  );
+                  print('result: $result');
+                },
+                icon: const MoreHorizIcon(),
+              ),
+            ],
+          ),
+          const Spacer(),
+          InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                const Spacer(),
+                const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.redAccent,
+                ),
+                Text(
+                  '$likesCounts',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

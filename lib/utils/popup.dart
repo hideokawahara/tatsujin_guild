@@ -7,14 +7,17 @@ import 'dialog.dart';
 
 Future<bool> showRemoveFavoritePopup({
   required BuildContext context,
+  required String messageText,
+  required String deleteText,
+  required String cancelText,
   required Future<bool> Function() removeFavoriteCallback,
 }) async {
   bool? result = await showCupertinoModalPopup<bool?>(
     context: context,
     builder: (BuildContext context) {
       return CupertinoActionSheet(
-        message: const Text(
-          'お気に入りから削除しますか？',
+        message: Text(
+          messageText,
         ),
         actions: <Widget>[
           CupertinoActionSheetAction(
@@ -22,11 +25,15 @@ Future<bool> showRemoveFavoritePopup({
             onPressed: () {
               Navigator.of(context).pop(true);
             },
-            child: const Text('削除する'),
+            child: Text(
+              deleteText,
+            ),
           )
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: const Text('キャンセル'),
+          child: Text(
+            cancelText,
+          ),
           onPressed: () {
             Navigator.of(context).pop(false);
           },
