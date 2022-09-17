@@ -83,6 +83,7 @@ class RankingPageBody extends StatelessWidget {
     return Consumer<TimeLineViewModel>(
       builder: (context, timeLineModel, child) {
         return GridView.builder(
+          key: const PageStorageKey(0),
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 24,
@@ -124,6 +125,7 @@ class TimeLinePageBody extends StatelessWidget {
           );
         } else {
           return ListView.builder(
+            key: const PageStorageKey(1),
             clipBehavior: Clip.none,
             // scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(
