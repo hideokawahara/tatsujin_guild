@@ -12,9 +12,11 @@ import 'package:tatsujin_guild/view_models/time_line_view_model.dart';
 //Widgets
 import '../widgets/card.dart';
 import '../widgets/icon.dart';
+import 'package:tatsujin_guild/widgets/tab_bar.dart';
 
 class TimeLinePage extends StatelessWidget {
   const TimeLinePage({Key? key}) : super(key: key);
+  final List<String> tabContents = const ['ランキング', 'タイムライン'];
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +38,8 @@ class TimeLinePage extends StatelessWidget {
               },
               child: const BackArrowIcon(),
             ),
-            bottom: const TabBar(
-              unselectedLabelColor: Colors.grey,
-              labelColor: Colors.black,
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.wine_bar_sharp,
-                    // color: Colors.black,
-                  ),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.run_circle,
-                    // color: Colors.black,
-                  ),
-                ),
-              ],
+            bottom: DefaultTabBar(
+              tabContents: tabContents,
             ),
           ),
           body: const TabBarView(
