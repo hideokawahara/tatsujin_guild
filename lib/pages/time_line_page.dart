@@ -126,7 +126,12 @@ class TimeLinePageBody extends StatelessWidget {
           return ListView.builder(
             clipBehavior: Clip.none,
             // scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 24,
+              right: 16,
+              bottom: 120,
+            ),
             itemCount: timeLineModel.timeLineList.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext listContext, int index) {
