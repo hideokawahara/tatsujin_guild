@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 //Pages
 import 'package:tatsujin_guild/pages/home_page.dart';
 import 'package:tatsujin_guild/pages/posts_manage_page.dart';
+import 'package:tatsujin_guild/pages/setting_page.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
@@ -24,9 +25,9 @@ class BottomTab extends StatelessWidget {
       icon: BottomPostIcon(),
       label: '投稿',
     ),
-    const Text('マイページ'): const BottomNavigationBarItem(
-      icon: BottomMyPageIcon(),
-      label: 'マイページ',
+    const SettingPage(): const BottomNavigationBarItem(
+      icon: BottomSettingIcon(),
+      label: '設定',
     ),
   };
 

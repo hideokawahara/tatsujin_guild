@@ -23,13 +23,13 @@ class BottomPostIcon extends StatelessWidget {
   }
 }
 
-class BottomMyPageIcon extends StatelessWidget {
-  const BottomMyPageIcon({Key? key}) : super(key: key);
+class BottomSettingIcon extends StatelessWidget {
+  const BottomSettingIcon({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Icon(
-      Icons.person,
+      Icons.settings,
     );
   }
 }
