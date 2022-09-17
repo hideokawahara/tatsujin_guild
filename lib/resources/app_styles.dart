@@ -12,4 +12,14 @@ class AppStyles {
     fontWeight: FontWeight.w700,
     color: Colors.black,
   );
+
+  ///タブのテキストスタイルの設定
+  static const activeTabStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+  static const inactiveTabStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 }

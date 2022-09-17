@@ -11,9 +11,12 @@ import 'package:tatsujin_guild/view_models/posts_manage_view_model.dart';
 
 //Widgets
 import '../widgets/card.dart';
+import 'package:tatsujin_guild/widgets/tab_bar.dart';
 
 class PostsManagePage extends StatelessWidget {
   const PostsManagePage({Key? key}) : super(key: key);
+
+  final List<String> tabContents = const ['投稿', 'お気に入り'];
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +32,8 @@ class PostsManagePage extends StatelessWidget {
               '投稿した',
               style: AppStyles.titleStyle,
             ),
-            bottom: const TabBar(
-              unselectedLabelColor: Colors.grey,
-              labelColor: Colors.black,
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.emergency_recording_sharp,
-                    // color: Colors.black,
-                  ),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.favorite,
-                    // color: Colors.black,
-                  ),
-                ),
-              ],
+            bottom: DefaultTabBar(
+              tabContents: tabContents,
             ),
           ),
           body: const TabBarView(
