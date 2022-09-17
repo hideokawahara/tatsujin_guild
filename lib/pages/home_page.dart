@@ -67,7 +67,7 @@ class HomePageBody extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.of(context).push(
+            Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
                 builder: (_) => const TimeLinePage(),
               ),
@@ -114,11 +114,10 @@ class HomePageBody extends StatelessWidget {
                     int rank = index + 1;
                     return HomePostCard(
                       rank: rank,
-                      likesCounts: 1000,
-                      contents: homeModel.postList[index],
-                      authorImage:
-                          'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
-                      authorName: '投稿者',
+                      likesCounts: homeModel.postList[index].likesCounts,
+                      contents: homeModel.postList[index].contents,
+                      authorImage: homeModel.postList[index].authorImage,
+                      authorName: homeModel.postList[index].authorName,
                       margin: const EdgeInsets.only(
                         right: 16,
                       ),

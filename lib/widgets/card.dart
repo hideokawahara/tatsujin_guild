@@ -28,88 +28,147 @@ class HomePostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.0),
-        border: Border.all(color: Colors.black12),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            spreadRadius: 1.0,
-            blurRadius: 10.0,
-            offset: Offset(10, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                '人気$rank位',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const Spacer(),
-              const Icon(
-                Icons.favorite_rounded,
-                color: Colors.redAccent,
-              ),
-              Text(
-                '$likesCounts',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          const Divider(),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              contents,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                //Todo: fontを追加する
-                // fontFamily: 'Shippori_Antique',
-              ),
+    return InkWell(
+      onTap: () {
+        // Navigator.of(context, rootNavigator: true).push(
+        //   MaterialPageRoute(
+        //     builder: (_) => FemaleDetailsPage(
+        //       index: index,
+        //       name: name,
+        //       age: age,
+        //       profileMessage: profileMessage,
+        //       mainPhoto: mainPhoto,
+        //       photoList: photoList,
+        //       preference: preference,
+        //     ),
+        //   ),
+        // );
+      },
+      child: Container(
+        width: 200,
+        margin: margin,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(color: Colors.black12),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              spreadRadius: 1.0,
+              blurRadius: 10.0,
+              offset: Offset(10, 10),
             ),
-          ),
-          const Spacer(),
-          InkWell(
-            onTap: () {},
-            child: Row(
-              children: [
-                CircleAvatar(
-                  //Todo: image networkを差し替える
-                  backgroundImage: Image.network(
-                    authorImage,
-                    fit: BoxFit.cover,
-                  ).image,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  authorName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    child: Hero(
+                      tag: 'imageHero$rank',
+                      child: Image.network(
+                        authorImage,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16.0),
+                          foregroundDecoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: FractionalOffset.center,
+                              end: FractionalOffset.bottomCenter,
+                              colors: [
+                                Colors.black.withOpacity(0.0),
+                                Colors.black.withOpacity(1.0),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 16,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                authorName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 8,
+                left: 16,
+                bottom: 16,
+                right: 16,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Hero(
+                        tag: 'rankingHero$rank',
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(
+                              10,
+                            ),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          child: Row(
+                            children: [
+                              // icon,
+                              Text(
+                                '第$rank位',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
