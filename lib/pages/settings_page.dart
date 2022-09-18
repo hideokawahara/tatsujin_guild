@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 //Resources
 import 'package:tatsujin_guild/resources/app_styles.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
