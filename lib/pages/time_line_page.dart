@@ -84,9 +84,11 @@ class RankingPageBody extends StatelessWidget {
       builder: (context, timeLineModel, child) {
         return GridView.builder(
           key: const PageStorageKey(0),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 24,
+          padding: const EdgeInsets.only(
+            left: 16,
+            top: 24,
+            right: 16,
+            bottom: 120,
           ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
