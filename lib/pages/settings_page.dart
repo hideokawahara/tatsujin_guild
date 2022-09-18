@@ -41,8 +41,10 @@ class SettingPageBody extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final settingsViewModel =
         Provider.of<SettingsViewModel>(context, listen: false);
-    List<Map<String, dynamic>> settingsContents =
+    final List<Map<String, dynamic>> settingsContents =
         settingsViewModel.settingsContents;
+    final List<Map<String, dynamic>> informationContents =
+        settingsViewModel.informationContents;
     return Container(
       height: screenHeight,
       padding: const EdgeInsets.all(
@@ -114,6 +116,40 @@ class SettingPageBody extends StatelessWidget {
             height: 24,
           ),
           ...settingsContents.map((content) {
+            final String? setTitle = settingsViewModel.getContent<String>(
+              json: content,
+              property: 'list_title',
+            );
+            final Widget? setIcon = settingsViewModel.getContent<Widget>(
+              json: content,
+              property: 'list_icon',
+            );
+            final Function? setFunction =
+                settingsViewModel.getContent<Function>(
+              json: content,
+              property: 'list_function',
+            );
+            return settingListTile(
+              title: setTitle,
+              icon: setIcon,
+              listCallback: setFunction,
+            );
+          }),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            'お知らせ',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          ...informationContents.map((content) {
             final String? setTitle = settingsViewModel.getContent<String>(
               json: content,
               property: 'list_title',

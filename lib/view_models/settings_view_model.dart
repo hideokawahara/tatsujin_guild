@@ -37,11 +37,44 @@ class SettingsViewModel extends ChangeNotifier {
         },
       },
     ];
+    _informationContents = [
+      {
+        'list_title': 'お知らせ',
+        'list_icon': const Icon(
+          Icons.info,
+        ),
+        'list_function': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const LogoutPage(),
+            ),
+          );
+        },
+      },
+      {
+        'list_title': 'アプリの使い方',
+        'list_icon': const Icon(
+          Icons.description,
+        ),
+        'list_function': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const DeleteAccountPage(),
+            ),
+          );
+        },
+      },
+    ];
   }
   final BuildContext context;
   List<Map<String, dynamic>> _settingsContents = [];
   List<Map<String, dynamic>> get settingsContents {
     return [..._settingsContents];
+  }
+
+  List<Map<String, dynamic>> _informationContents = [];
+  List<Map<String, dynamic>> get informationContents {
+    return [..._informationContents];
   }
 
   T? getContent<T>({
