@@ -1,6 +1,10 @@
 //Packages
 import 'package:flutter/material.dart';
 
+//Pages
+import 'package:tatsujin_guild/pages/delete_account_page.dart';
+import 'package:tatsujin_guild/pages/logout_page.dart';
+
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel({
     required this.context,
@@ -12,9 +16,11 @@ class SettingsViewModel extends ChangeNotifier {
           Icons.logout,
         ),
         'list_function': () {
-          print('from logout');
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => Text('test')));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const LogoutPage(),
+            ),
+          );
         },
       },
       {
@@ -23,7 +29,11 @@ class SettingsViewModel extends ChangeNotifier {
           Icons.delete_forever,
         ),
         'list_function': () {
-          print('from delete');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const DeleteAccountPage(),
+            ),
+          );
         },
       },
     ];

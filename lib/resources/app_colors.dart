@@ -10,4 +10,8 @@ class AppColors {
   static const tabActiveColor = Colors.redAccent;
   static const tabActiveTextColor = Colors.white;
   static const tabInactiveTextColor = Colors.black;
+
+  // 設定画面の設定
+  //Todo: 定数にしたい
+  static Color? settingsBackGroundColor = Colors.grey[200];
 }

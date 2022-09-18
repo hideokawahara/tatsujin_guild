@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_styles.dart';
+import 'package:tatsujin_guild/resources/app_colors.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/settings_view_model.dart';
@@ -19,13 +20,13 @@ class SettingsPage extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.defaultBackGroundColor,
           title: const Text(
             '設定',
             style: AppStyles.titleStyle,
           ),
         ),
-        backgroundColor: Colors.grey[200],
+        backgroundColor: AppColors.settingsBackGroundColor,
         body: const SettingPageBody(),
       ),
     );
