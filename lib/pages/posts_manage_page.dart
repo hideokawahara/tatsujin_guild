@@ -62,7 +62,7 @@ class PostsManagePageBody extends StatelessWidget {
         } else {
           return ListView.builder(
             clipBehavior: Clip.none,
-            // scrollDirection: Axis.horizontal,
+            key: const PageStorageKey(0),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             itemCount: timeLineModel.postList.length,
             shrinkWrap: true,
@@ -97,6 +97,7 @@ class FavoritePostsPageBody extends StatelessWidget {
         } else {
           return ListView.builder(
             clipBehavior: Clip.none,
+            key: const PageStorageKey(1),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             itemCount: timeLineModel.favoriteList.length,
             shrinkWrap: true,
