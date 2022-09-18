@@ -1,55 +1,47 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_styles.dart';
+
+//ViewModels
+import 'package:tatsujin_guild/view_models/settings_view_model.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          '設定',
-          style: AppStyles.titleStyle,
-        ),
+    return ChangeNotifierProvider(
+      create: (context) => SettingsViewModel(
+        context: context,
       ),
-      backgroundColor: Colors.grey[200],
-      body: SettingPageBody(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Text(
+            '設定',
+            style: AppStyles.titleStyle,
+          ),
+        ),
+        backgroundColor: Colors.grey[200],
+        body: const SettingPageBody(),
+      ),
     );
   }
 }
 
 class SettingPageBody extends StatelessWidget {
-  SettingPageBody({Key? key}) : super(key: key);
-
-  final List<Map<String, dynamic>> settingsContents = [
-    {
-      'list_title': 'ログアウト',
-      'list_icon': const Icon(
-        Icons.logout,
-      ),
-      'list_function': () {
-        print('from logout');
-      },
-    },
-    {
-      'list_title': 'アカウント削除',
-      'list_icon': const Icon(
-        Icons.delete_forever,
-      ),
-      'list_function': () {
-        print('from delete');
-      },
-    },
-  ];
+  const SettingPageBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final settingsViewModel =
+        Provider.of<SettingsViewModel>(context, listen: false);
+    List<Map<String, dynamic>> settingsContents =
+        settingsViewModel.settingsContents;
     return Container(
       height: screenHeight,
       padding: const EdgeInsets.all(
@@ -121,15 +113,16 @@ class SettingPageBody extends StatelessWidget {
             height: 24,
           ),
           ...settingsContents.map((content) {
-            final String? setTitle = getContent<String>(
+            final String? setTitle = settingsViewModel.getContent<String>(
               json: content,
               property: 'list_title',
             );
-            final Widget? setIcon = getContent<Widget>(
+            final Widget? setIcon = settingsViewModel.getContent<Widget>(
               json: content,
               property: 'list_icon',
             );
-            final Function? setFunction = getContent<Function>(
+            final Function? setFunction =
+                settingsViewModel.getContent<Function>(
               json: content,
               property: 'list_function',
             );
@@ -164,16 +157,5 @@ class SettingPageBody extends StatelessWidget {
       ),
       tileColor: Colors.white,
     );
-  }
-
-  T? getContent<T>({
-    required Map<String, dynamic> json,
-    required String property,
-  }) {
-    if (json.containsKey(property) && json[property] is T) {
-      return json[property];
-    } else {
-      return null;
-    }
   }
 }
