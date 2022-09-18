@@ -18,13 +18,34 @@ class SettingPage extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.grey[200],
-      body: const SettingPageBody(),
+      body: SettingPageBody(),
     );
   }
 }
 
 class SettingPageBody extends StatelessWidget {
-  const SettingPageBody({Key? key}) : super(key: key);
+  SettingPageBody({Key? key}) : super(key: key);
+
+  final List<Map<String, dynamic>> settingsContents = [
+    {
+      'list_title': 'ログアウト',
+      'list_icon': const Icon(
+        Icons.logout,
+      ),
+      'list_function': () {
+        print('from logout');
+      },
+    },
+    {
+      'list_title': 'アカウント削除',
+      'list_icon': const Icon(
+        Icons.delete_forever,
+      ),
+      'list_function': () {
+        print('from delete');
+      },
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -99,37 +120,60 @@ class SettingPageBody extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.logout,
-            ),
-            title: const Text(
-              'ログアウト',
-            ),
-            onTap: () {},
-            shape: Border(
-              bottom: BorderSide(
-                width: 1,
-                color: Colors.grey[300] ?? Colors.white,
-              ),
-            ),
-            tileColor: Colors.white,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.delete_forever,
-            ),
-            title: const Text('アカウント削除'),
-            onTap: () {},
-            shape: Border(
-              bottom: BorderSide(
-                color: Colors.grey[300] ?? Colors.white,
-              ),
-            ),
-            tileColor: Colors.white,
-          ),
+          ...settingsContents.map((content) {
+            final String? setTitle = getContent<String>(
+              json: content,
+              property: 'list_title',
+            );
+            final Widget? setIcon = getContent<Widget>(
+              json: content,
+              property: 'list_icon',
+            );
+            final Function? setFunction = getContent<Function>(
+              json: content,
+              property: 'list_function',
+            );
+            return settingListTile(
+              title: setTitle,
+              icon: setIcon,
+              listCallback: setFunction,
+            );
+          }),
         ],
       ),
     );
+  }
+
+  Widget settingListTile({
+    required String? title,
+    required Widget? icon,
+    required Function? listCallback,
+  }) {
+    return ListTile(
+      leading: icon,
+      title: Text(title ?? ''),
+      onTap: () {
+        if (listCallback != null) {
+          listCallback();
+        }
+      },
+      shape: Border(
+        bottom: BorderSide(
+          color: Colors.grey[300] ?? Colors.white,
+        ),
+      ),
+      tileColor: Colors.white,
+    );
+  }
+
+  T? getContent<T>({
+    required Map<String, dynamic> json,
+    required String property,
+  }) {
+    if (json.containsKey(property) && json[property] is T) {
+      return json[property];
+    } else {
+      return null;
+    }
   }
 }
