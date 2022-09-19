@@ -13,6 +13,7 @@ import 'package:tatsujin_guild/view_models/time_line_view_model.dart';
 import '../widgets/card.dart';
 import '../widgets/icon.dart';
 import 'package:tatsujin_guild/widgets/tab_bar.dart';
+import 'package:tatsujin_guild/widgets/circular_indicator.dart';
 
 class TimeLinePage extends StatelessWidget {
   const TimeLinePage({Key? key}) : super(key: key);
@@ -42,11 +43,25 @@ class TimeLinePage extends StatelessWidget {
               tabContents: tabContents,
             ),
           ),
-          body: const TabBarView(
-            children: [
-              RankingPageBody(),
-              TimeLinePageBody(),
-            ],
+          body: Builder(
+            builder: (BuildContext newContext) {
+              return FutureBuilder<void>(
+                future:
+                    Provider.of<TimeLineViewModel>(newContext, listen: false)
+                        .fetchInitialAllPosts(),
+                builder: (_, snapShot) {
+                  if (snapShot.connectionState == ConnectionState.waiting) {
+                    return const DefaultCircularIndicator();
+                  }
+                  return const TabBarView(
+                    children: [
+                      RankingPageBody(),
+                      TimeLinePageBody(),
+                    ],
+                  );
+                },
+              );
+            },
           ),
           floatingActionButton: Consumer<TimeLineViewModel>(
             builder: (context, timeLineModel, child) {
@@ -82,33 +97,39 @@ class RankingPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TimeLineViewModel>(
       builder: (context, timeLineModel, child) {
-        return GridView.builder(
-          key: const PageStorageKey(0),
-          padding: const EdgeInsets.only(
-            left: 16,
-            top: 24,
-            right: 16,
-            bottom: 120,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 24,
-            crossAxisSpacing: 16,
-            mainAxisExtent: 240,
-          ),
-          itemCount: timeLineModel.rankingList.length,
-          itemBuilder: (context, index) {
-            int rank = index + 1;
-            return HomePostCard(
-              rank: rank,
-              likesCounts: timeLineModel.rankingList[index].likesCounts,
-              contents: timeLineModel.rankingList[index].contents,
-              authorImage: timeLineModel.rankingList[index].authorImage,
-              authorName: timeLineModel.rankingList[index].authorName,
-            );
-          },
-          shrinkWrap: true,
-        );
+        if (timeLineModel.rankingList.isEmpty) {
+          return const Center(
+            child: Text('ランキングがありません'),
+          );
+        } else {
+          return GridView.builder(
+            key: const PageStorageKey(0),
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 24,
+              right: 16,
+              bottom: 120,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 24,
+              crossAxisSpacing: 16,
+              mainAxisExtent: 240,
+            ),
+            itemCount: timeLineModel.rankingList.length,
+            itemBuilder: (context, index) {
+              int rank = index + 1;
+              return HomePostCard(
+                rank: rank,
+                likesCounts: timeLineModel.rankingList[index].likesCounts,
+                contents: timeLineModel.rankingList[index].contents,
+                authorImage: timeLineModel.rankingList[index].authorImage,
+                authorName: timeLineModel.rankingList[index].authorName,
+              );
+            },
+            shrinkWrap: true,
+          );
+        }
       },
     );
   }
