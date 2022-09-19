@@ -1,6 +1,9 @@
 //Packages
 import 'package:flutter/material.dart';
 
+//Resources
+import 'package:tatsujin_guild/resources/app_colors.dart';
+
 //Utils
 import 'package:tatsujin_guild/utils/popup.dart';
 
@@ -48,7 +51,7 @@ class HomePostCard extends StatelessWidget {
         width: 200,
         margin: margin,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.defaultBackGroundColor,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(color: Colors.black12),
           boxShadow: const [
@@ -138,7 +141,7 @@ class HomePostCard extends StatelessWidget {
                         tag: 'rankingHero$rank',
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.redAccent,
+                            color: AppColors.mainAppColor,
                             borderRadius: BorderRadius.circular(
                               10,
                             ),
@@ -205,7 +208,7 @@ class _TimeLinePostcardState extends State<TimeLinePostcard> {
       width: 200,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.defaultBackGroundColor,
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(color: Colors.black12),
         boxShadow: const [

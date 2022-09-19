@@ -52,7 +52,7 @@ class TimeLinePage extends StatelessWidget {
             builder: (context, timeLineModel, child) {
               if (timeLineModel.isShow) {
                 return FloatingActionButton(
-                  backgroundColor: Colors.redAccent,
+                  backgroundColor: AppColors.mainAppColor,
                   child: const Icon(
                     Icons.add,
                   ),

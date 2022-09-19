@@ -76,13 +76,16 @@ class SettingPageBody extends StatelessWidget {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                        color: Colors.redAccent,
+                        color: AppColors.mainAppColor,
                         borderRadius: BorderRadius.circular(25),
                         border: Border.all(
-                            color: Colors.grey[200] ?? Colors.white, width: 4),
+                          color: AppColors.settingsBackGroundColor ??
+                              AppColors.defaultBackGroundColor,
+                          width: 4,
+                        ),
                       ),
                       child: const Icon(
-                        Icons.add,
+                        Icons.settings,
                         color: Colors.white,
                       ),
                     ),

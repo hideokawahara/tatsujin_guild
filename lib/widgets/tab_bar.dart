@@ -24,7 +24,7 @@ class DefaultTabBar extends StatelessWidget implements PreferredSizeWidget {
         labelColor: AppColors.tabActiveTextColor,
         indicator: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: AppColors.tabActiveColor,
+          color: AppColors.mainAppColor,
         ),
         labelStyle: AppStyles.activeTabStyle,
         unselectedLabelStyle: AppStyles.inactiveTabStyle,
