@@ -12,6 +12,7 @@ class DefaultCircularIndicator extends StatelessWidget {
     return const Center(
       child: CircularProgressIndicator(
         color: AppColors.mainAppColor,
+        backgroundColor: Colors.white,
       ),
     );
   }

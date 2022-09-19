@@ -26,7 +26,7 @@ class TimeLinePage extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: AppColors.defaultBackGroundColor,
+          backgroundColor: AppColors.mainAppColor,
           appBar: AppBar(
             backgroundColor: AppColors.defaultBackGroundColor,
             title: const Text(

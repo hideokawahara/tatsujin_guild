@@ -25,7 +25,7 @@ class PostsManagePage extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: AppColors.defaultBackGroundColor,
+          backgroundColor: AppColors.settingsBackGroundColor,
           appBar: AppBar(
             backgroundColor: AppColors.defaultBackGroundColor,
             title: const Text(
