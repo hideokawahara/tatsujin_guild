@@ -13,6 +13,7 @@ import 'package:tatsujin_guild/resources/app_styles.dart';
 import 'package:tatsujin_guild/widgets/logo.dart';
 import 'package:tatsujin_guild/widgets/card.dart';
 import 'package:tatsujin_guild/widgets/icon.dart';
+import 'package:tatsujin_guild/widgets/circular_indicator.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/home_view_model.dart';
@@ -94,39 +95,52 @@ class HomePageBody extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 300,
-          child: Consumer<HomeViewModel>(
-            builder: (context, homeModel, child) {
-              if (homeModel.postList.isEmpty) {
-                return const Center(
-                  child: Text('Jokeがありません'),
-                );
-              } else {
-                return ListView.builder(
-                  clipBehavior: Clip.none,
-                  scrollDirection: Axis.horizontal,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  itemCount: homeModel.postList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext listContext, int index) {
-                    int rank = index + 1;
-                    return HomePostCard(
-                      rank: rank,
-                      likesCounts: homeModel.postList[index].likesCounts,
-                      contents: homeModel.postList[index].contents,
-                      authorImage: homeModel.postList[index].authorImage,
-                      authorName: homeModel.postList[index].authorName,
-                      margin: const EdgeInsets.only(
-                        right: 16,
-                      ),
+        //Todo: FireStore導入時 streamBuilderに差し替える
+        FutureBuilder<void>(
+          future: Provider.of<HomeViewModel>(context, listen: false)
+              .fetchRankingPosts(),
+          builder: (_, snapShot) {
+            if (snapShot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                height: 300,
+                child: DefaultCircularIndicator(),
+              );
+            }
+            return SizedBox(
+              height: 300,
+              child: Consumer<HomeViewModel>(
+                builder: (context, homeModel, child) {
+                  if (homeModel.postList.isEmpty) {
+                    return const Center(
+                      child: Text('ランキングがありません'),
                     );
-                  },
-                );
-              }
-            },
-          ),
+                  } else {
+                    return ListView.builder(
+                      clipBehavior: Clip.none,
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      itemCount: homeModel.postList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext listContext, int index) {
+                        int rank = index + 1;
+                        return HomePostCard(
+                          rank: rank,
+                          likesCounts: homeModel.postList[index].likesCounts,
+                          contents: homeModel.postList[index].contents,
+                          authorImage: homeModel.postList[index].authorImage,
+                          authorName: homeModel.postList[index].authorName,
+                          margin: const EdgeInsets.only(
+                            right: 16,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            );
+          },
         ),
       ],
     );
