@@ -135,7 +135,7 @@ class RankingPageBody extends StatelessWidget {
             itemCount: timeLineModel.rankingList.length,
             itemBuilder: (context, index) {
               int rank = index + 1;
-              return HomePostCard(
+              return RankingPostCard(
                 rank: rank,
                 likesCounts: timeLineModel.rankingList[index].likesCounts,
                 contents: timeLineModel.rankingList[index].contents,

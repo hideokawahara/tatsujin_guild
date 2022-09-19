@@ -10,8 +10,8 @@ import 'package:tatsujin_guild/utils/popup.dart';
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
 
-class HomePostCard extends StatelessWidget {
-  const HomePostCard({
+class RankingPostCard extends StatelessWidget {
+  const RankingPostCard({
     Key? key,
     required this.rank,
     required this.likesCounts,

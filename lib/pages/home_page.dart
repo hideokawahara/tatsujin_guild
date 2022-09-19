@@ -124,7 +124,7 @@ class HomePageBody extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (BuildContext listContext, int index) {
                         int rank = index + 1;
-                        return HomePostCard(
+                        return RankingPostCard(
                           rank: rank,
                           likesCounts: homeModel.postList[index].likesCounts,
                           contents: homeModel.postList[index].contents,
