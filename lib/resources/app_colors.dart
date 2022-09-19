@@ -5,7 +5,7 @@ class AppColors {
   static const defaultBackGroundColor = Colors.white;
   static const defaultInactiveColor = Colors.grey;
   static const defaultActiveColor = Colors.black;
-  static const mainAppColor = Colors.green;
+  static const mainAppColor = Color(0xFF1538B7);
 
   /// タブの色設定
   // tabのアクティブカラーは要らないかもしれない
