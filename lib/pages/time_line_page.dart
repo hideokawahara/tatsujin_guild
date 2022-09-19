@@ -25,64 +25,80 @@ class TimeLinePage extends StatelessWidget {
       create: (_) => TimeLineViewModel(),
       child: DefaultTabController(
         length: 2,
-        child: Scaffold(
-          backgroundColor: AppColors.mainAppColor,
-          appBar: AppBar(
-            backgroundColor: AppColors.defaultBackGroundColor,
-            title: const Text(
-              'TATSUJINランキング\n前回のお題：駄洒落',
-              style: AppStyles.titleStyle,
-            ),
-            leading: InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const BackArrowIcon(),
-            ),
-            bottom: DefaultTabBar(
-              tabContents: tabContents,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.centerLeft,
+              end: FractionalOffset.centerRight,
+              colors: [
+                AppColors.mainAppColor,
+                Colors.black,
+              ],
+              stops: [
+                0.0,
+                1.0,
+              ],
             ),
           ),
-          body: Builder(
-            builder: (BuildContext newContext) {
-              return FutureBuilder<void>(
-                future:
-                    Provider.of<TimeLineViewModel>(newContext, listen: false)
-                        .fetchInitialAllPosts(),
-                builder: (_, snapShot) {
-                  if (snapShot.connectionState == ConnectionState.waiting) {
-                    return const DefaultCircularIndicator();
-                  }
-                  return const TabBarView(
-                    children: [
-                      RankingPageBody(),
-                      TimeLinePageBody(),
-                    ],
-                  );
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: AppColors.defaultBackGroundColor,
+              title: const Text(
+                'TATSUJINランキング\n前回のお題：駄洒落',
+                style: AppStyles.titleStyle,
+              ),
+              leading: InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
                 },
-              );
-            },
-          ),
-          floatingActionButton: Consumer<TimeLineViewModel>(
-            builder: (context, timeLineModel, child) {
-              if (timeLineModel.isShow) {
-                return FloatingActionButton(
-                  backgroundColor: AppColors.mainAppColor,
-                  child: const Icon(
-                    Icons.add,
-                  ),
-                  onPressed: () {},
+                child: const BackArrowIcon(),
+              ),
+              bottom: DefaultTabBar(
+                tabContents: tabContents,
+              ),
+            ),
+            body: Builder(
+              builder: (BuildContext newContext) {
+                return FutureBuilder<void>(
+                  future:
+                      Provider.of<TimeLineViewModel>(newContext, listen: false)
+                          .fetchInitialAllPosts(),
+                  builder: (_, snapShot) {
+                    if (snapShot.connectionState == ConnectionState.waiting) {
+                      return const DefaultCircularIndicator();
+                    }
+                    return const TabBarView(
+                      children: [
+                        RankingPageBody(),
+                        TimeLinePageBody(),
+                      ],
+                    );
+                  },
                 );
-              } else {
-                return FloatingActionButton(
-                  backgroundColor: Colors.black12,
-                  child: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () {},
-                );
-              }
-            },
+              },
+            ),
+            floatingActionButton: Consumer<TimeLineViewModel>(
+              builder: (context, timeLineModel, child) {
+                if (timeLineModel.isShow) {
+                  return FloatingActionButton(
+                    backgroundColor: AppColors.mainAppColor,
+                    child: const Icon(
+                      Icons.add,
+                    ),
+                    onPressed: () {},
+                  );
+                } else {
+                  return FloatingActionButton(
+                    backgroundColor: Colors.black12,
+                    child: const Icon(
+                      Icons.close,
+                    ),
+                    onPressed: () {},
+                  );
+                }
+              },
+            ),
           ),
         ),
       ),

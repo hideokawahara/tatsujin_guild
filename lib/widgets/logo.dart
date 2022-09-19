@@ -1,6 +1,9 @@
 //Packages
 import 'package:flutter/material.dart';
 
+//Resources
+import 'package:tatsujin_guild/resources/app_colors.dart';
+
 class TopLogo extends StatelessWidget {
   const TopLogo({
     Key? key,
@@ -16,7 +19,20 @@ class TopLogo extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      color: Colors.grey[200],
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset.centerLeft,
+          end: FractionalOffset.centerRight,
+          colors: [
+            AppColors.mainAppColor,
+            Colors.black,
+          ],
+          stops: [
+            0.0,
+            1.0,
+          ],
+        ),
+      ),
       alignment: Alignment.center,
       child: const Text(
         'TATSUJIN GUILD',
