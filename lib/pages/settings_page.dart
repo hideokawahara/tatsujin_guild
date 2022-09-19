@@ -79,8 +79,7 @@ class SettingPageBody extends StatelessWidget {
                         color: AppColors.mainAppColor,
                         borderRadius: BorderRadius.circular(25),
                         border: Border.all(
-                          color: AppColors.settingsBackGroundColor ??
-                              AppColors.defaultBackGroundColor,
+                          color: AppColors.settingsBackGroundColor,
                           width: 4,
                         ),
                       ),

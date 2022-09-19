@@ -19,20 +19,7 @@ class TopLogo extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset.centerLeft,
-          end: FractionalOffset.centerRight,
-          colors: [
-            AppColors.mainAppColor,
-            Colors.black,
-          ],
-          stops: [
-            0.0,
-            1.0,
-          ],
-        ),
-      ),
+      decoration: AppColors.mainAppColorDecoration,
       alignment: Alignment.center,
       child: const Text(
         'TATSUJIN GUILD',

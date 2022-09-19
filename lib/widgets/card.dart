@@ -1,6 +1,9 @@
 //Packages
 import 'package:flutter/material.dart';
 
+//Pages
+import 'package:tatsujin_guild/pages/user_details_page.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 
@@ -9,6 +12,7 @@ import 'package:tatsujin_guild/utils/popup.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
+import 'package:tatsujin_guild/widgets/tag.dart';
 
 class RankingPostCard extends StatelessWidget {
   const RankingPostCard({
@@ -33,19 +37,24 @@ class RankingPostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.of(context, rootNavigator: true).push(
-        //   MaterialPageRoute(
-        //     builder: (_) => FemaleDetailsPage(
-        //       index: index,
-        //       name: name,
-        //       age: age,
-        //       profileMessage: profileMessage,
-        //       mainPhoto: mainPhoto,
-        //       photoList: photoList,
-        //       preference: preference,
-        //     ),
-        //   ),
-        // );
+        showModalBottomSheet(
+          context: context,
+          useRootNavigator: true,
+          isScrollControlled: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+          ),
+          builder: (_) => UserDetailsPage(
+            index: rank,
+            name: authorName,
+            profileMessage: '駄洒落が得意で、キャッチフレーズ考えるの苦手です\n最近回文にハマってます',
+            authorImage: authorImage,
+            contents: contents,
+            likeCounts: likesCounts,
+          ),
+        );
       },
       child: Container(
         width: 200,
@@ -139,30 +148,8 @@ class RankingPostCard extends StatelessWidget {
                     children: [
                       Hero(
                         tag: 'rankingHero$rank',
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.mainAppColor,
-                            borderRadius: BorderRadius.circular(
-                              10,
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          child: Row(
-                            children: [
-                              // icon,
-                              Text(
-                                '第$rank位',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                        child: RankingTag(
+                          rank: rank,
                         ),
                       ),
                     ],

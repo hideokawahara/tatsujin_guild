@@ -26,20 +26,7 @@ class TimeLinePage extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: FractionalOffset.centerLeft,
-              end: FractionalOffset.centerRight,
-              colors: [
-                AppColors.mainAppColor,
-                Colors.black,
-              ],
-              stops: [
-                0.0,
-                1.0,
-              ],
-            ),
-          ),
+          decoration: AppColors.mainAppColorDecoration,
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
