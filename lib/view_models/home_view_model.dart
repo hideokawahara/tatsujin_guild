@@ -18,7 +18,7 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> fetchRankingPosts() async {
     List<Post> result = await postRepository.getRankingPosts();
     _postList.clear();
-    _postList.addAll(result);
+    _postList.addAll(result.take(4));
     notifyListeners();
   }
 }
