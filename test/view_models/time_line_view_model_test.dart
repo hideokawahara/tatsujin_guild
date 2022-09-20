@@ -32,7 +32,6 @@ void main() {
         timeLineViewModel.addLikeCounter();
       }
     });
-    // isShowがfalseだと失敗する
     test('投稿のテスト', () async {
       bool result = await timeLineViewModel.createPost();
       expect(result, true);
