@@ -33,12 +33,15 @@ class TimeLineViewModel extends ChangeNotifier {
   }
 
   Future<bool> createPost() async {
-    await Future.delayed(
-      const Duration(
-        milliseconds: 1000,
-      ),
+    final post = Post(
+      authorName: '達人太郎',
+      authorImage:
+          'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg',
+      contents: _postText,
+      likesCounts: 0,
     );
-    return true;
+    bool result = await postRepository.postTimeLinePost(post: post);
+    return result;
   }
 
   void addLikeCounter() {

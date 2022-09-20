@@ -89,6 +89,7 @@ class TimeLinePage extends StatelessWidget {
                         keyValue: 'update',
                       )) {
                         print('calll fetch func');
+                        timeLineModel.fetchInitialAllPosts();
                       }
                     },
                   );
