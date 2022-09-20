@@ -1,10 +1,17 @@
 //Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+//Pages
+import 'package:tatsujin_guild/pages/post_page.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
+
+//Utils
+import 'package:tatsujin_guild/utils/check_result.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/time_line_view_model.dart';
@@ -73,7 +80,17 @@ class TimeLinePage extends StatelessWidget {
                     child: const Icon(
                       Icons.add,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      Map<String, dynamic>? result =
+                          await _showPostsScreen(context);
+                      print('check the result $result');
+                      if (isValidResult(
+                        result: result,
+                        keyValue: 'update',
+                      )) {
+                        print('calll fetch func');
+                      }
+                    },
                   );
                 } else {
                   return FloatingActionButton(
@@ -87,6 +104,18 @@ class TimeLinePage extends StatelessWidget {
               },
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Future<Map<String, dynamic>?> _showPostsScreen(BuildContext context) async {
+    return await showCupertinoModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      builder: (context) => Navigator(
+        onGenerateRoute: (context) => MaterialPageRoute<PostPage>(
+          builder: (context) => const PostPage(),
         ),
       ),
     );

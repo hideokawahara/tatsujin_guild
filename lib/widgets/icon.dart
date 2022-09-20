@@ -76,3 +76,15 @@ class MoreHorizIcon extends StatelessWidget {
     );
   }
 }
+
+class CloseIcon extends StatelessWidget {
+  const CloseIcon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.close,
+      color: Colors.black,
+    );
+  }
+}

@@ -25,6 +25,22 @@ class TimeLineViewModel extends ChangeNotifier {
 
   bool isShow = false;
 
+  String _postText = '';
+  String get postText => _postText;
+  set postText(String setText) {
+    _postText = setText;
+    notifyListeners();
+  }
+
+  Future<bool> createPost() async {
+    await Future.delayed(
+      const Duration(
+        milliseconds: 1000,
+      ),
+    );
+    return true;
+  }
+
   void addLikeCounter() {
     _likeCounter++;
     if (_likeCounter == 3) {
