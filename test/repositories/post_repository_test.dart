@@ -35,4 +35,33 @@ void main() {
       expect(updateList.length, initialList.length + 1);
     });
   });
+
+  group('投稿管理のテスト', () {
+    test('自分の投稿の取得', () async {
+      final List<Post> result = await postRepository.getMyPosts();
+      expect(result.isNotEmpty, true);
+    });
+    test('お気に入りの取得', () async {
+      final List<Post> result = await postRepository.getFavoritePosts();
+      expect(result.isNotEmpty, true);
+    });
+    test('自分の投稿の削除', () async {
+      final List<Post> initialList = [...await postRepository.getMyPosts()];
+      final Post post = initialList.first;
+      bool result = await postRepository.deleteMyPost(post: post);
+      expect(result, true);
+      final List<Post> updateList = await postRepository.getMyPosts();
+      expect(updateList.length, initialList.length - 1);
+    });
+    test('お気に入りの削除', () async {
+      final List<Post> initialList = [
+        ...await postRepository.getFavoritePosts()
+      ];
+      final Post post = initialList.first;
+      bool result = await postRepository.deleteFavoritePost(post: post);
+      expect(result, true);
+      final List<Post> updateList = await postRepository.getFavoritePosts();
+      expect(updateList.length, initialList.length - 1);
+    });
+  });
 }

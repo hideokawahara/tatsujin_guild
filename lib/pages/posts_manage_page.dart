@@ -12,6 +12,7 @@ import 'package:tatsujin_guild/view_models/posts_manage_view_model.dart';
 //Widgets
 import '../widgets/card.dart';
 import 'package:tatsujin_guild/widgets/tab_bar.dart';
+import '../widgets/circular_indicator.dart';
 
 class PostsManagePage extends StatelessWidget {
   const PostsManagePage({Key? key}) : super(key: key);
@@ -25,24 +26,37 @@ class PostsManagePage extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: AppColors.settingsBackGroundColor,
-          appBar: AppBar(
-            backgroundColor: AppColors.defaultBackGroundColor,
-            title: const Text(
-              '投稿した',
-              style: AppStyles.titleStyle,
+            backgroundColor: AppColors.settingsBackGroundColor,
+            appBar: AppBar(
+              backgroundColor: AppColors.defaultBackGroundColor,
+              title: const Text(
+                '投稿した',
+                style: AppStyles.titleStyle,
+              ),
+              bottom: DefaultTabBar(
+                tabContents: tabContents,
+              ),
             ),
-            bottom: DefaultTabBar(
-              tabContents: tabContents,
-            ),
-          ),
-          body: const TabBarView(
-            children: [
-              PostsManagePageBody(),
-              FavoritePostsPageBody(),
-            ],
-          ),
-        ),
+            body: Builder(
+              builder: (BuildContext newContext) {
+                return FutureBuilder<void>(
+                  future: Provider.of<PostsManageViewModel>(newContext,
+                          listen: false)
+                      .fetchInitialAllPosts(),
+                  builder: (_, snapShot) {
+                    if (snapShot.connectionState == ConnectionState.waiting) {
+                      return const DefaultCircularIndicator();
+                    }
+                    return const TabBarView(
+                      children: [
+                        PostsManagePageBody(),
+                        FavoritePostsPageBody(),
+                      ],
+                    );
+                  },
+                );
+              },
+            )),
       ),
     );
   }
@@ -54,8 +68,8 @@ class PostsManagePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PostsManageViewModel>(
-      builder: (context, timeLineModel, child) {
-        if (timeLineModel.postList.isEmpty) {
+      builder: (context, postModel, child) {
+        if (postModel.postList.isEmpty) {
           return const Center(
             child: Text('投稿がありません'),
           );
@@ -64,16 +78,16 @@ class PostsManagePageBody extends StatelessWidget {
             clipBehavior: Clip.none,
             key: const PageStorageKey(0),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            itemCount: timeLineModel.postList.length,
+            itemCount: postModel.postList.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext listContext, int index) {
               return MyPostcard(
-                likesCounts: timeLineModel.postList[index].likesCounts,
-                contents: timeLineModel.postList[index].contents,
-                deletePostCallback: () async {
-                  await Future.delayed(Duration(milliseconds: 1000));
-                  return true;
-                },
+                likesCounts: postModel.postList[index].likesCounts,
+                contents: postModel.postList[index].contents,
+                deletePostCallback: () =>
+                    postModel.deleteMyPost(postModel.postList[index]),
+                //要らなかったら消す
+                reloadPostCallback: () => postModel.fetchInitialAllPosts(),
               );
             },
           );
@@ -89,8 +103,8 @@ class FavoritePostsPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PostsManageViewModel>(
-      builder: (context, timeLineModel, child) {
-        if (timeLineModel.favoriteList.isEmpty) {
+      builder: (context, postModel, child) {
+        if (postModel.favoriteList.isEmpty) {
           return const Center(
             child: Text('お気に入りの投稿がありません'),
           );
@@ -99,17 +113,18 @@ class FavoritePostsPageBody extends StatelessWidget {
             clipBehavior: Clip.none,
             key: const PageStorageKey(1),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            itemCount: timeLineModel.favoriteList.length,
+            itemCount: postModel.favoriteList.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext listContext, int index) {
               return FavoritePostcard(
-                likesCounts: timeLineModel.favoriteList[index].likesCounts,
-                contents: timeLineModel.favoriteList[index].contents,
-                authorImage: timeLineModel.favoriteList[index].authorImage,
-                authorName: timeLineModel.favoriteList[index].authorName,
-                removeLikeCallback: () {
-                  // timeLineModel.addLikeCounter();
-                },
+                likesCounts: postModel.favoriteList[index].likesCounts,
+                contents: postModel.favoriteList[index].contents,
+                authorImage: postModel.favoriteList[index].authorImage,
+                authorName: postModel.favoriteList[index].authorName,
+                removeLikeCallback: () => postModel.deleteFavorite(
+                  postModel.favoriteList[index],
+                ),
+                reloadPostCallback: postModel.fetchInitialAllPosts,
               );
             },
           );

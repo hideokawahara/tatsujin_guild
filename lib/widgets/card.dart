@@ -317,12 +317,14 @@ class FavoritePostcard extends StatelessWidget {
     required this.authorImage,
     required this.authorName,
     required this.removeLikeCallback,
+    required this.reloadPostCallback,
   }) : super(key: key);
   final int likesCounts;
   final String contents;
   final String authorImage;
   final String authorName;
-  final void Function() removeLikeCallback;
+  final Future<bool> Function() removeLikeCallback;
+  final Future<void> Function() reloadPostCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -370,12 +372,12 @@ class FavoritePostcard extends StatelessWidget {
                     messageText: 'お気に入りから削除しますか？',
                     deleteText: '削除する',
                     cancelText: 'キャンセル',
-                    removeFavoriteCallback: () async {
-                      await Future.delayed(Duration(milliseconds: 1000));
-                      return true;
-                    },
+                    removeFavoriteCallback: removeLikeCallback,
                   );
                   print('result: $result');
+                  if (result) {
+                    await reloadPostCallback();
+                  }
                 },
                 icon: const MoreHorizIcon(),
               ),
@@ -435,10 +437,12 @@ class MyPostcard extends StatelessWidget {
     required this.likesCounts,
     required this.contents,
     required this.deletePostCallback,
+    required this.reloadPostCallback,
   }) : super(key: key);
   final int likesCounts;
   final String contents;
   final Future<bool> Function() deletePostCallback;
+  final Future<void> Function() reloadPostCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -489,6 +493,9 @@ class MyPostcard extends StatelessWidget {
                     removeFavoriteCallback: deletePostCallback,
                   );
                   print('result: $result');
+                  if (result) {
+                    await reloadPostCallback();
+                  }
                 },
                 icon: const MoreHorizIcon(),
               ),
