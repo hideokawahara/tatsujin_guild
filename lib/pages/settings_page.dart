@@ -2,12 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Pages
+import 'package:tatsujin_guild/pages/my_page.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_styles.dart';
 import 'package:tatsujin_guild/resources/app_colors.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/settings_view_model.dart';
+import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -58,19 +62,22 @@ class SettingPageBody extends StatelessWidget {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: Image.network(
-                            'https://news.mynavi.jp/article/20211022-1984461/ogp_images/ogp.jpg')
-                        .image,
-                    radius: 65,
-                  ),
+                  Consumer<AuthViewModel>(builder: (context, authModel, child) {
+                    final String? photoPath = authModel.myData?.mainPhoto;
+                    return CircleAvatar(
+                      backgroundImage: Image.network(
+                        photoPath ?? '',
+                      ).image,
+                      radius: 65,
+                    );
+                  }),
                   InkWell(
                     onTap: () {
-                      // Navigator.of(context, rootNavigator: true).push(
-                      //   MaterialPageRoute(
-                      //     builder: (_) => const PhotoEditPage(),
-                      //   ),
-                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const MyPage(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 40,
@@ -94,13 +101,16 @@ class SettingPageBody extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              const Text(
-                '達人太郎',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Consumer<AuthViewModel>(builder: (context, authModel, child) {
+                final String? name = authModel.myData?.name;
+                return Text(
+                  name ?? '',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }),
             ],
           ),
           const SizedBox(
