@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
 
+//Widgest
+import 'package:tatsujin_guild/widgets/icon.dart';
+
 class PostButton extends StatelessWidget {
   const PostButton({
     Key? key,
@@ -56,5 +59,44 @@ class PostButton extends StatelessWidget {
       setColor = AppColors.defaultInactiveColor;
     }
     return setColor;
+  }
+}
+
+class AddPhotoButton extends StatelessWidget {
+  const AddPhotoButton({
+    Key? key,
+    this.height,
+    this.width,
+    this.iconSize,
+    required this.onTap,
+  }) : super(key: key);
+  final double? height;
+  final double? width;
+  final double? iconSize;
+  final Function onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: AppColors.mainAppColor,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: AppColors.settingsBackGroundColor,
+            width: 4,
+          ),
+        ),
+        child: AddPhotoIcon(
+          color: Colors.white,
+          size: iconSize,
+        ),
+      ),
+    );
   }
 }

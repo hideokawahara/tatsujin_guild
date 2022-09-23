@@ -11,6 +11,7 @@ import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
 import 'package:tatsujin_guild/widgets/user_avatar.dart';
+import 'package:tatsujin_guild/widgets/button.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -46,14 +47,26 @@ class MyPageBody extends StatelessWidget {
                     height: 400,
                     width: screenWidth,
                     child: Center(
-                      child: Consumer<AuthViewModel>(
-                        builder: (context, authModel, child) {
-                          final String? photoPath = authModel.myData?.mainPhoto;
-                          return UserCircleAvatar(
-                            path: photoPath,
-                            radius: 120,
-                          );
-                        },
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          Consumer<AuthViewModel>(
+                            builder: (context, authModel, child) {
+                              final String? photoPath =
+                                  authModel.myData?.mainPhoto;
+                              return UserCircleAvatar(
+                                path: photoPath,
+                                radius: 120,
+                              );
+                            },
+                          ),
+                          AddPhotoButton(
+                            height: 64,
+                            width: 64,
+                            iconSize: 32,
+                            onTap: () {},
+                          ),
+                        ],
                       ),
                     ),
                   ),

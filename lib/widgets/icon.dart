@@ -107,3 +107,22 @@ class UserIcon extends StatelessWidget {
     );
   }
 }
+
+class AddPhotoIcon extends StatelessWidget {
+  const AddPhotoIcon({
+    Key? key,
+    this.color,
+    this.size,
+  }) : super(key: key);
+  final Color? color;
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.add_a_photo,
+      color: color,
+      size: size,
+    );
+  }
+}
