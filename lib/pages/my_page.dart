@@ -10,6 +10,7 @@ import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
+import 'package:tatsujin_guild/widgets/user_avatar.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -46,16 +47,14 @@ class MyPageBody extends StatelessWidget {
                     width: screenWidth,
                     child: Center(
                       child: Consumer<AuthViewModel>(
-                          builder: (context, authModel, child) {
-                        final String? photoPath = authModel.myData?.mainPhoto;
-                        return CircleAvatar(
-                          radius: 120,
-                          backgroundImage: Image.network(
-                            photoPath ?? '',
-                            fit: BoxFit.cover,
-                          ).image,
-                        );
-                      }),
+                        builder: (context, authModel, child) {
+                          final String? photoPath = authModel.myData?.mainPhoto;
+                          return UserCircleAvatar(
+                            path: photoPath,
+                            radius: 120,
+                          );
+                        },
+                      ),
                     ),
                   ),
                   Positioned(
@@ -133,19 +132,19 @@ class MyPageBody extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    const Text(
                       'なにいれよう？',
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Icon(
+                      children: const [
+                        Icon(
                           Icons.favorite_rounded,
                           color: Colors.redAccent,
                         ),
                         Text(
                           '666',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: Colors.grey,

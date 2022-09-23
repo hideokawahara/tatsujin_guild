@@ -13,6 +13,9 @@ import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/view_models/settings_view_model.dart';
 import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
+//Widgets
+import 'package:tatsujin_guild/widgets/user_avatar.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -64,10 +67,8 @@ class SettingPageBody extends StatelessWidget {
                 children: [
                   Consumer<AuthViewModel>(builder: (context, authModel, child) {
                     final String? photoPath = authModel.myData?.mainPhoto;
-                    return CircleAvatar(
-                      backgroundImage: Image.network(
-                        photoPath ?? '',
-                      ).image,
+                    return UserCircleAvatar(
+                      path: photoPath,
                       radius: 65,
                     );
                   }),

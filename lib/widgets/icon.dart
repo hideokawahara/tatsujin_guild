@@ -88,3 +88,22 @@ class CloseIcon extends StatelessWidget {
     );
   }
 }
+
+class UserIcon extends StatelessWidget {
+  const UserIcon({
+    Key? key,
+    this.color,
+    this.size,
+  }) : super(key: key);
+  final Color? color;
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.person,
+      color: color,
+      size: size,
+    );
+  }
+}
