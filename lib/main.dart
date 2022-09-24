@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 //BottomTab
 import 'bottom_tab.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/auth_repository.dart';
+
 //ViewModels
 import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
@@ -22,7 +25,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthViewModel>(
-          create: (_) => AuthViewModel(),
+          create: (_) => AuthViewModel(
+            auth: AuthRepositoryImpl(),
+          ),
         ),
       ],
       child: const MyAppBody(),

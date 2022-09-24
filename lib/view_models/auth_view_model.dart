@@ -9,7 +9,10 @@ import 'package:tatsujin_guild/models/user.dart';
 import 'package:tatsujin_guild/repositories/auth_repository.dart';
 
 class AuthViewModel extends ChangeNotifier {
-  final _auth = AuthRepositoryImpl();
+  AuthViewModel({
+    required this.auth,
+  });
+  final AuthRepository auth;
 
   User? _myData;
   User? get myData {
@@ -22,7 +25,7 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   Future<bool> fetchMyData() async {
-    User? setMyData = await _auth.getMyData();
+    User? setMyData = await auth.getMyData();
     if (setMyData != null) {
       _myData = setMyData;
       _isLogin = true;
