@@ -8,6 +8,7 @@ import 'package:tatsujin_guild/models/post.dart';
 import 'package:tatsujin_guild/repositories/post_repository.dart';
 
 void main() {
+  //todo: テスト用のリポジトリに差し替える
   final postRepository = PostRepositoryImpl();
   group('投稿の取得のテスト', () {
     test('ランキングの取得', () async {
