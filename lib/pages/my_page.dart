@@ -1,9 +1,13 @@
 //Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
+
+//Utils
+import 'package:tatsujin_guild/utils/popup.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/auth_view_model.dart';
@@ -34,6 +38,7 @@ class MyPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final rootAuthModel = Provider.of<AuthViewModel>(context, listen: false);
     return Stack(
       children: [
         SingleChildScrollView(
@@ -64,7 +69,13 @@ class MyPageBody extends StatelessWidget {
                             height: 64,
                             width: 64,
                             iconSize: 32,
-                            onTap: () {},
+                            onTap: () async {
+                              File? file =
+                                  await showGetImagePopUp(context: context);
+                              if (file != null) {
+                                rootAuthModel.addMainPhoto(file);
+                              }
+                            },
                           ),
                         ],
                       ),

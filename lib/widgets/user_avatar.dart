@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 
+//Utils
+import 'package:tatsujin_guild/utils/set_image.dart';
+
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
 
@@ -21,9 +24,9 @@ class UserCircleAvatar extends StatelessWidget {
     if (path != null && path!.isNotEmpty) {
       return CircleAvatar(
         backgroundColor: AppColors.mainAppColor,
-        backgroundImage: Image.network(
+        backgroundImage: setImage(
           path ?? '',
-        ).image,
+        )?.image,
         radius: radius,
       );
     } else {

@@ -1,5 +1,6 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 //Models
 import 'package:tatsujin_guild/models/user.dart';
@@ -28,6 +29,15 @@ class AuthViewModel extends ChangeNotifier {
       return true;
     } else {
       return false;
+    }
+  }
+
+  void addMainPhoto(File file) {
+    if (_myData != null) {
+      _myData!.mainPhoto = file.path;
+      notifyListeners();
+    } else {
+      return;
     }
   }
 }

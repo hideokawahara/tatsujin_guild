@@ -1,9 +1,11 @@
 //Packages
 import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 //Utils
 import 'package:tatsujin_guild/utils/progress_function.dart';
 import 'dialog.dart';
+import 'package:tatsujin_guild/utils/image_picker_function.dart';
 
 Future<bool> showDeletePopup({
   required BuildContext context,
@@ -61,5 +63,55 @@ Future<bool> showDeletePopup({
     }
   } else {
     return false;
+  }
+}
+
+enum Photo {
+  library,
+  camera,
+}
+
+Future<File?> showGetImagePopUp({required BuildContext context}) async {
+  Photo? result = await showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoActionSheet(
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.of(context).pop(Photo.library);
+            },
+            child: const Text(
+              'ライブラリから選ぶ',
+            ),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.of(context).pop(Photo.camera);
+            },
+            child: const Text(
+              '写真を撮る',
+            ),
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'キャンセル',
+          ),
+        ),
+      );
+    },
+  );
+  if (result == null) {
+    return null;
+  } else if (result == Photo.library) {
+    return await getPhotoFromLibrary();
+  } else if (result == Photo.camera) {
+    return await getPhotoFromCamera();
+  } else {
+    return null;
   }
 }
