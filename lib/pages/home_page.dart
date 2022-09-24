@@ -70,7 +70,7 @@ class HomePageBody extends StatelessWidget {
           onTap: () {
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
-                builder: (_) => const TimeLinePage(),
+                builder: (_) => TimeLinePage(),
               ),
             );
           },

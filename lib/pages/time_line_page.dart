@@ -23,8 +23,9 @@ import 'package:tatsujin_guild/widgets/tab_bar.dart';
 import 'package:tatsujin_guild/widgets/circular_indicator.dart';
 
 class TimeLinePage extends StatelessWidget {
-  const TimeLinePage({Key? key}) : super(key: key);
+  TimeLinePage({Key? key}) : super(key: key);
   final List<String> tabContents = const ['ランキング', 'タイムライン'];
+  final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +63,12 @@ class TimeLinePage extends StatelessWidget {
                     if (snapShot.connectionState == ConnectionState.waiting) {
                       return const DefaultCircularIndicator();
                     }
-                    return const TabBarView(
+                    return TabBarView(
                       children: [
-                        RankingPageBody(),
-                        TimeLinePageBody(),
+                        const RankingPageBody(),
+                        TimeLinePageBody(
+                          controller: _controller,
+                        ),
                       ],
                     );
                   },
@@ -83,13 +86,12 @@ class TimeLinePage extends StatelessWidget {
                     onPressed: () async {
                       Map<String, dynamic>? result =
                           await _showPostsScreen(context);
-                      print('check the result $result');
                       if (isValidResult(
                         result: result,
                         keyValue: 'update',
                       )) {
-                        print('calll fetch func');
-                        timeLineModel.fetchInitialAllPosts();
+                        await timeLineModel.fetchInitialAllPosts();
+                        await scrollToTop(_controller);
                       }
                     },
                   );
@@ -121,6 +123,12 @@ class TimeLinePage extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> scrollToTop(ScrollController controller) => controller.animateTo(
+        0,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
 }
 
 class RankingPageBody extends StatelessWidget {
@@ -169,7 +177,11 @@ class RankingPageBody extends StatelessWidget {
 }
 
 class TimeLinePageBody extends StatelessWidget {
-  const TimeLinePageBody({Key? key}) : super(key: key);
+  const TimeLinePageBody({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -182,6 +194,7 @@ class TimeLinePageBody extends StatelessWidget {
         } else {
           return ListView.builder(
             key: const PageStorageKey(1),
+            controller: controller,
             clipBehavior: Clip.none,
             // scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(
