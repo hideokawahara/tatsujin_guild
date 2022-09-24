@@ -8,7 +8,10 @@ import '../models/post.dart';
 import 'package:tatsujin_guild/repositories/post_repository.dart';
 
 class PostsManageViewModel extends ChangeNotifier {
-  final postRepository = PostRepositoryImpl();
+  PostsManageViewModel({
+    required this.postRepository,
+  });
+  final PostRepository postRepository;
   final List<Post> _postList = [];
   List<Post> get postList {
     return [..._postList];

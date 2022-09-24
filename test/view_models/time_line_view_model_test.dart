@@ -4,11 +4,16 @@ import 'package:flutter_test/flutter_test.dart';
 //Models
 import 'package:tatsujin_guild/models/post.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/post_repository.dart';
+
 //ViewModels
 import 'package:tatsujin_guild/view_models/time_line_view_model.dart';
 
 void main() {
-  final timeLineViewModel = TimeLineViewModel();
+  final timeLineViewModel = TimeLineViewModel(
+    postRepository: PostRepositoryImpl(),
+  );
   group('取得のテスト', () {
     test('ランキングと投稿の取得', () async {
       expect(timeLineViewModel.rankingList.isEmpty, true);

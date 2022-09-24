@@ -8,6 +8,10 @@ import 'package:tatsujin_guild/models/post.dart';
 import 'package:tatsujin_guild/repositories/post_repository.dart';
 
 class TimeLineViewModel extends ChangeNotifier {
+  TimeLineViewModel({
+    required this.postRepository,
+  });
+  final PostRepository postRepository;
   final List<Post> _rankingList = [];
   List<Post> get rankingList {
     return [..._rankingList];
@@ -44,8 +48,6 @@ class TimeLineViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  final postRepository = PostRepositoryImpl();
 
   Future<void> fetchInitialAllPosts() async {
     List<Post> rankingResult = await postRepository.getRankingPosts();

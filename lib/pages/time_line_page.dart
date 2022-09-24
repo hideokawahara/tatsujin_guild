@@ -6,6 +6,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 //Pages
 import 'package:tatsujin_guild/pages/post_page.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/post_repository.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
@@ -30,7 +33,9 @@ class TimeLinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TimeLineViewModel(),
+      create: (_) => TimeLineViewModel(
+        postRepository: PostRepositoryImpl(),
+      ),
       child: DefaultTabController(
         length: 2,
         child: Container(

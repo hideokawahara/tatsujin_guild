@@ -4,11 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 //Models
 import 'package:tatsujin_guild/models/post.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/post_repository.dart';
+
 //ViewModels
 import 'package:tatsujin_guild/view_models/posts_manage_view_model.dart';
 
 void main() {
-  final postViewModel = PostsManageViewModel();
+  final postViewModel = PostsManageViewModel(
+    //todo: テスト用のリポジトリに変更する
+    postRepository: PostRepositoryImpl(),
+  );
   group('取得のテスト', () {
     test('投稿とお気に入りの取得', () async {
       expect(postViewModel.postList.isEmpty, true);

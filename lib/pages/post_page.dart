@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 import '../models/post.dart';
 import '../models/user.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/post_repository.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
@@ -31,7 +34,9 @@ class PostPage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: ChangeNotifierProvider(
-        create: (_) => TimeLineViewModel(),
+        create: (_) => TimeLineViewModel(
+          postRepository: PostRepositoryImpl(),
+        ),
         child: Scaffold(
           backgroundColor: AppColors.defaultBackGroundColor,
           appBar: AppBar(

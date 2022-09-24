@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Repositories
+import 'package:tatsujin_guild/repositories/post_repository.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
@@ -22,7 +25,9 @@ class PostsManagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => PostsManageViewModel(),
+      create: (_) => PostsManageViewModel(
+        postRepository: PostRepositoryImpl(),
+      ),
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
