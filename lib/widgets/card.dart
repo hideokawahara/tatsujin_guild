@@ -9,6 +9,7 @@ import 'package:tatsujin_guild/resources/app_colors.dart';
 
 //Utils
 import 'package:tatsujin_guild/utils/popup.dart';
+import 'package:tatsujin_guild/utils/set_image.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/icon.dart';
@@ -230,10 +231,9 @@ class _TimeLinePostcardState extends State<TimeLinePostcard> {
                 widget.isShow
                     ? CircleAvatar(
                         //Todo: image networkを差し替える
-                        backgroundImage: Image.network(
+                        backgroundImage: setImage(
                           widget.authorImage,
-                          fit: BoxFit.cover,
-                        ).image,
+                        )?.image,
                       )
                     : Container(
                         height: 40,

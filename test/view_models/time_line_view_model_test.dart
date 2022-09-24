@@ -33,7 +33,13 @@ void main() {
       }
     });
     test('投稿のテスト', () async {
-      bool result = await timeLineViewModel.createPost();
+      final Post post = Post(
+        authorName: 'test user',
+        authorImage: 'no url',
+        contents: 'post text',
+        likesCounts: 0,
+      );
+      bool result = await timeLineViewModel.createPost(post);
       expect(result, true);
     });
   });

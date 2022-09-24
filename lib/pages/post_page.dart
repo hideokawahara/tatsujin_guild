@@ -2,6 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Models
+import '../models/post.dart';
+import '../models/user.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/resources/app_styles.dart';
@@ -12,6 +16,7 @@ import '../utils/progress_function.dart';
 
 //ViewModels
 import '../view_models/time_line_view_model.dart';
+import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/button.dart';
@@ -62,6 +67,8 @@ class _PostPageBodyState extends State<PostPageBody> {
     final double screenWidth = MediaQuery.of(context).size.width;
     void setPostTextCallback(String text) =>
         Provider.of<TimeLineViewModel>(context, listen: false).postText = text;
+    final User? myData =
+        Provider.of<AuthViewModel>(context, listen: true).myData;
     return SafeArea(
       child: Column(
         children: [
@@ -76,9 +83,15 @@ class _PostPageBodyState extends State<PostPageBody> {
                   isActivate: timeLineModel.postText.isNotEmpty,
                   width: screenWidth,
                   onTap: () async {
+                    final Post post = Post(
+                      authorName: myData!.name,
+                      authorImage: myData.mainPhoto,
+                      contents: timeLineModel.postText,
+                      likesCounts: 0,
+                    );
                     bool result = await functionUseProgressIndicator(
                       context: context,
-                      function: () => timeLineModel.createPost(),
+                      function: () => timeLineModel.createPost(post),
                     );
                     if (result) {
                       await showResultDialog(
