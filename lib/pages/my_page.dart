@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 
+//Pages
+import 'package:tatsujin_guild/pages/message_edit_page.dart';
+
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
 
@@ -200,11 +203,11 @@ class MyPageBody extends StatelessWidget {
   }) {
     return InkWell(
       onTap: () {
-        // Navigator.of(context, rootNavigator: true).push(
-        //   MaterialPageRoute(
-        //     builder: (_) => const MessageEditPage(),
-        //   ),
-        // );
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (_) => const MessageEditPage(),
+          ),
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

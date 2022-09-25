@@ -62,3 +62,66 @@ class _PostTextFormState extends State<PostTextForm> {
     );
   }
 }
+
+class MessageTextForm extends StatefulWidget {
+  const MessageTextForm({
+    Key? key,
+    required this.initialMessage,
+    required this.setTextCallback,
+  }) : super(key: key);
+  final String initialMessage;
+  final void Function(String) setTextCallback;
+
+  @override
+  State<MessageTextForm> createState() => _MessageTextFormState();
+}
+
+class _MessageTextFormState extends State<MessageTextForm> {
+  final controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.initialMessage;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: 24,
+        horizontal: 16,
+      ),
+      child: TextFormField(
+        autofocus: true,
+        onChanged: (String value) {
+          widget.setTextCallback(value);
+        },
+        controller: controller,
+        maxLines: 30,
+        decoration: InputDecoration(
+          hintText: '自己紹介を入力しよう',
+          hintStyle: const TextStyle(
+            fontSize: 16,
+            color: Colors.grey,
+          ),
+          fillColor: Colors.grey[50],
+          filled: true,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(
+              color: Colors.grey,
+              width: 2.0,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: Colors.grey[100]!,
+              width: 1.0,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

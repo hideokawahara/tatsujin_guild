@@ -43,4 +43,13 @@ class AuthViewModel extends ChangeNotifier {
       return;
     }
   }
+
+  void addMessageText(String text) {
+    if (_myData != null) {
+      _myData!.profileMessage = text;
+      notifyListeners();
+    } else {
+      return;
+    }
+  }
 }
