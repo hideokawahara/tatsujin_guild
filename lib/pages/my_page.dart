@@ -125,24 +125,16 @@ class MyPageBody extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const Text(
-                      'プロフィール',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
                     Consumer<AuthViewModel>(
-                        builder: (context, authModel, child) {
-                      final String? profileMessage =
-                          authModel.myData?.profileMessage;
-                      return Text(
-                        profileMessage ?? '',
-                      );
-                    }),
+                      builder: (context, authModel, child) {
+                        final String profileMessage =
+                            authModel.myData?.profileMessage ?? '';
+                        return introductionSection(
+                          context: context,
+                          profileMessage: profileMessage,
+                        );
+                      },
+                    ),
                     const SizedBox(
                       height: 24,
                     ),
@@ -199,6 +191,39 @@ class MyPageBody extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget introductionSection({
+    required BuildContext context,
+    required String profileMessage,
+  }) {
+    return InkWell(
+      onTap: () {
+        // Navigator.of(context, rootNavigator: true).push(
+        //   MaterialPageRoute(
+        //     builder: (_) => const MessageEditPage(),
+        //   ),
+        // );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'プロフィール',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            profileMessage,
+          )
+        ],
+      ),
     );
   }
 }
