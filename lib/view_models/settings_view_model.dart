@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //Pages
 import 'package:tatsujin_guild/pages/delete_account_page.dart';
 import 'package:tatsujin_guild/pages/logout_page.dart';
+import 'package:tatsujin_guild/pages/login_page.dart';
 
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel({
@@ -44,9 +45,9 @@ class SettingsViewModel extends ChangeNotifier {
           Icons.info,
         ),
         'list_function': () {
-          Navigator.of(context).push(
+          Navigator.of(context, rootNavigator: true).push(
             MaterialPageRoute(
-              builder: (_) => const LogoutPage(),
+              builder: (_) => const LoginPage(),
             ),
           );
         },

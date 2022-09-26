@@ -125,3 +125,46 @@ class _MessageTextFormState extends State<MessageTextForm> {
     );
   }
 }
+
+class SingleTextFormField extends StatelessWidget {
+  const SingleTextFormField({
+    Key? key,
+    required this.onSaved,
+    required this.regEx,
+    required this.hintText,
+    required this.obscureText,
+    this.controller,
+  }) : super(key: key);
+  final Function(String) onSaved;
+  final String regEx;
+  final String hintText;
+  final bool obscureText;
+  final TextEditingController? controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      onSaved: (String? value) => onSaved(value!),
+      cursorColor: Colors.white,
+      style: const TextStyle(color: Colors.white),
+      obscureText: obscureText,
+      validator: (String? value) {
+        return RegExp(regEx).hasMatch(value!) ? null : '不正な値です';
+      },
+      decoration: InputDecoration(
+        fillColor: Colors.black26,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide.none,
+        ),
+        errorStyle: TextStyle(
+          color: Colors.white,
+        ),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey),
+      ),
+    );
+  }
+}

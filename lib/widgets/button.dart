@@ -100,3 +100,39 @@ class AddPhotoButton extends StatelessWidget {
     );
   }
 }
+
+class AuthButton extends StatelessWidget {
+  final String name;
+  final Function onPressed;
+
+  const AuthButton({
+    Key? key,
+    required this.name,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: AppColors.defaultBackGroundColor,
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 24,
+      ),
+      child: TextButton(
+        onPressed: () => onPressed(),
+        child: Text(
+          name,
+          style: const TextStyle(
+            fontSize: 20,
+            color: AppColors.mainAppColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}
