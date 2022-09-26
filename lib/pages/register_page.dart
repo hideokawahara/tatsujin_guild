@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 //Pages
-import 'package:tatsujin_guild/pages/register_page.dart';
+import 'package:tatsujin_guild/pages/login_page.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
@@ -11,26 +11,26 @@ import 'package:tatsujin_guild/resources/app_colors.dart';
 import 'package:tatsujin_guild/widgets/text_form.dart';
 import 'package:tatsujin_guild/widgets/button.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.mainAppColor,
-      body: LoginPageBody(),
+      body: RegisterPageBody(),
     );
   }
 }
 
-class LoginPageBody extends StatefulWidget {
-  const LoginPageBody({super.key});
+class RegisterPageBody extends StatefulWidget {
+  const RegisterPageBody({super.key});
 
   @override
-  State<LoginPageBody> createState() => _LoginPageBodyState();
+  State<RegisterPageBody> createState() => _RegisterPageBodyState();
 }
 
-class _LoginPageBodyState extends State<LoginPageBody> {
+class _RegisterPageBodyState extends State<RegisterPageBody> {
   // late double _deviceHeight;
   //
   // late double _deviceWidth;
@@ -132,7 +132,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
 
   Widget _loginButton() {
     return AuthButton(
-      name: 'ログイン',
+      name: '会員登録',
       onPressed: () {
         if (_loginFormKey.currentState!.validate()) {
           _loginFormKey.currentState!.save();
@@ -148,12 +148,12 @@ class _LoginPageBodyState extends State<LoginPageBody> {
       onTap: () {
         Navigator.of(context, rootNavigator: true).push(
           MaterialPageRoute(
-            builder: (_) => const RegisterPage(),
+            builder: (_) => const LoginPage(),
           ),
         );
       },
       child: const Text(
-        '新規会員登録',
+        'ログイン',
         style: TextStyle(
           color: Colors.yellowAccent,
         ),
