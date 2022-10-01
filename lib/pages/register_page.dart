@@ -38,6 +38,8 @@ class _RegisterPageBodyState extends State<RegisterPageBody> {
   // late AuthenticationProvider _auth;
   final _loginFormKey = GlobalKey<FormState>();
 
+  String? _name;
+
   String? _email;
 
   String? _password;
@@ -49,35 +51,34 @@ class _RegisterPageBodyState extends State<RegisterPageBody> {
     // _auth = Provider.of<AuthenticationProvider>(context);
     // _navigation = GetIt.instance.get<NavigationService>();
     final double screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      // padding: EdgeInsets.symmetric(
-      //   horizontal: _deviceWidth * 0.03,
-      //   vertical: _deviceHeight * 0.02,
-      // ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-      ),
-      // height: _deviceHeight * 0.98,
-      width: screenWidth,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _pageTitle(),
-          const SizedBox(
-            height: 40,
-          ),
-          _loginForm(),
-          const SizedBox(
-            height: 32,
-          ),
-          _loginButton(),
-          const SizedBox(
-            height: 40,
-          ),
-          _registerAccountLink(),
-        ],
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        width: screenWidth,
+        height: screenHeight,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _pageTitle(),
+            const SizedBox(
+              height: 40,
+            ),
+            _registerForm(),
+            const SizedBox(
+              height: 32,
+            ),
+            _registerButton(),
+            const SizedBox(
+              height: 40,
+            ),
+            _registerAccountLink(),
+          ],
+        ),
       ),
     );
   }
@@ -93,7 +94,7 @@ class _RegisterPageBodyState extends State<RegisterPageBody> {
     );
   }
 
-  Widget _loginForm() {
+  Widget _registerForm() {
     return Form(
       key: _loginFormKey,
       child: Column(
@@ -101,6 +102,19 @@ class _RegisterPageBodyState extends State<RegisterPageBody> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SingleTextFormField(
+            onSaved: (String value) {
+              setState(() {
+                _name = value;
+              });
+            },
+            regEx: r".{1,}",
+            hintText: "ニックネーム",
+            obscureText: false,
+          ),
+          const SizedBox(
+            height: 24,
+          ),
           SingleTextFormField(
             onSaved: (String value) {
               setState(() {
@@ -130,7 +144,7 @@ class _RegisterPageBodyState extends State<RegisterPageBody> {
     );
   }
 
-  Widget _loginButton() {
+  Widget _registerButton() {
     return AuthButton(
       name: '会員登録',
       onPressed: () {
