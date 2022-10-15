@@ -43,20 +43,23 @@ class BottomTab extends StatelessWidget {
           (content) => content.value,
         )
         .toList();
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: tabItems,
-        activeColor: AppColors.defaultActiveColor,
-        inactiveColor: AppColors.defaultInactiveColor,
-        backgroundColor: AppColors.defaultBackGroundColor,
-        // 追加したプロパティを記述する
-        height: 66,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: tabItems,
+          activeColor: AppColors.defaultActiveColor,
+          inactiveColor: AppColors.defaultInactiveColor,
+          backgroundColor: AppColors.defaultBackGroundColor,
+          // 追加したプロパティを記述する
+          height: 66,
+        ),
+        tabBuilder: (context, index) {
+          return CupertinoTabView(builder: (context) {
+            return pageWidgets[index];
+          });
+        },
       ),
-      tabBuilder: (context, index) {
-        return CupertinoTabView(builder: (context) {
-          return pageWidgets[index];
-        });
-      },
     );
   }
 }
