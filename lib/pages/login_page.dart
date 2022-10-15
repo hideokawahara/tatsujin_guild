@@ -1,11 +1,20 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Pages
 import 'package:tatsujin_guild/pages/register_page.dart';
+import 'package:tatsujin_guild/bottom_tab.dart';
 
 //Resources
 import 'package:tatsujin_guild/resources/app_colors.dart';
+
+//Utils
+import 'package:tatsujin_guild/utils/progress_function.dart';
+import 'package:tatsujin_guild/utils/dialog.dart';
+
+//ViewModels
+import 'package:tatsujin_guild/view_models/auth_view_model.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/text_form.dart';
@@ -48,6 +57,8 @@ class _LoginPageBodyState extends State<LoginPageBody> {
     // _deviceWidth = MediaQuery.of(context).size.width;
     // _auth = Provider.of<AuthenticationProvider>(context);
     // _navigation = GetIt.instance.get<NavigationService>();
+    final AuthViewModel auth =
+        Provider.of<AuthViewModel>(context, listen: false);
     final double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       // padding: EdgeInsets.symmetric(
@@ -72,7 +83,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
           const SizedBox(
             height: 32,
           ),
-          _loginButton(),
+          _loginButton(auth),
           const SizedBox(
             height: 40,
           ),
@@ -130,13 +141,36 @@ class _LoginPageBodyState extends State<LoginPageBody> {
     );
   }
 
-  Widget _loginButton() {
+  Widget _loginButton(AuthViewModel auth) {
     return AuthButton(
       name: 'ログイン',
-      onPressed: () {
+      onPressed: () async {
         if (_loginFormKey.currentState!.validate()) {
           _loginFormKey.currentState!.save();
-          // _auth.loginUsingEmailAndPassword(_email!, _password!);
+          bool result = await functionUseProgressIndicator(
+            context: context,
+            function: () => auth.login(
+              email: _email!,
+              password: _password!,
+            ),
+          );
+          if (result) {
+            await showResultDialog(
+              context: context,
+              dialogText: 'ログインに成功しました',
+            );
+            if (!mounted) return;
+            Navigator.of(context, rootNavigator: true).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => BottomTab(),
+              ),
+            );
+          } else {
+            await showResultDialog(
+              context: context,
+              dialogText: 'ログインに失敗しました',
+            );
+          }
         }
       },
     );

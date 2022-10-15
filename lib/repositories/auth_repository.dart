@@ -2,10 +2,23 @@
 import 'package:tatsujin_guild/models/user.dart';
 
 abstract class AuthRepository {
+  Future<bool> postLogin({
+    required String email,
+    required String password,
+  });
   Future<User?> getMyData();
 }
 
 class AuthRepositoryImpl extends AuthRepository {
+  @override
+  Future<bool> postLogin({
+    required String email,
+    required String password,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    return true;
+  }
+
   @override
   Future<User?> getMyData() async {
     await Future.delayed(const Duration(milliseconds: 1000));

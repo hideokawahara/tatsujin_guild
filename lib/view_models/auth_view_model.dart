@@ -24,6 +24,15 @@ class AuthViewModel extends ChangeNotifier {
     return _isLogin;
   }
 
+  Future<bool> login({
+    required String email,
+    required String password,
+  }) async =>
+      auth.postLogin(
+        email: email,
+        password: password,
+      );
+
   Future<bool> fetchMyData() async {
     User? setMyData = await auth.getMyData();
     if (setMyData != null) {
