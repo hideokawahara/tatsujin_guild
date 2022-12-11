@@ -10,6 +10,7 @@ import 'package:tatsujin_guild/repositories/auth_repository.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/auth_view_model.dart';
+import 'package:tatsujin_guild/view_models/master_view_model.dart';
 
 //Widgets
 import 'package:tatsujin_guild/widgets/circular_indicator.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthViewModel(
             auth: AuthRepositoryImpl(),
           ),
+        ),
+        ChangeNotifierProvider<MasterViewModel>(
+          create: (_) => MasterViewModel(),
         ),
       ],
       child: const MyAppBody(),
@@ -65,15 +69,19 @@ class MyAppBody extends StatelessWidget {
         },
       );
     } else {
-      return FutureBuilder<bool>(
-        future:
-            Provider.of<AuthViewModel>(context, listen: false).fetchMyData(),
+      return FutureBuilder(
+        future: Future.wait([
+          Provider.of<AuthViewModel>(context, listen: false).fetchMyData(),
+          Provider.of<MasterViewModel>(context, listen: false).fetchTopic(),
+        ]),
         builder: (_, snapshot) {
           final String initialRoute;
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const DefaultCircularIndicator();
-          } else if (snapshot.hasData) {
-            initialRoute = snapshot.data! ? '/home' : '/login';
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            final bool isLoginSuccess =
+                Provider.of<AuthViewModel>(context, listen: false).isLogin;
+            initialRoute = isLoginSuccess ? '/home' : '/login';
           } else {
             initialRoute = '/login';
           }

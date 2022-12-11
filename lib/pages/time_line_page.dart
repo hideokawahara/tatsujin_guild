@@ -18,6 +18,7 @@ import 'package:tatsujin_guild/utils/check_result.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/time_line_view_model.dart';
+import 'package:tatsujin_guild/view_models/master_view_model.dart';
 
 //Widgets
 import '../widgets/card.dart';
@@ -44,10 +45,14 @@ class TimeLinePage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               backgroundColor: AppColors.defaultBackGroundColor,
-              title: const Text(
-                'TATSUJINランキング\n前回のお題：駄洒落',
-                style: AppStyles.titleStyle,
-              ),
+              title:
+                  Consumer<MasterViewModel>(builder: (_, masterModel, child) {
+                final String topicText = masterModel.topic ?? "";
+                return Text(
+                  'TATSUJINランキング\n前回のお題：$topicText',
+                  style: AppStyles.titleStyle,
+                );
+              }),
               leading: InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
