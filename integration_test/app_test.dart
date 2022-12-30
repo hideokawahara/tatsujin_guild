@@ -11,8 +11,7 @@ void main() {
 
   group('e2eテスト', () {
     testWidgets('いいねする', (WidgetTester tester) async {
-      app.main();
-      await tester.pumpAndSettle();
+      await installApp(tester: tester);
 
       final Finder rankingText = find.text('昨日の人気のTATSUJINランキング');
       expect(rankingText, findsOneWidget);
@@ -33,16 +32,35 @@ void main() {
     });
 
     testWidgets('設定画面の編集', (WidgetTester tester) async {
-      app.main();
-      await tester.pumpAndSettle();
+      await installApp(tester: tester);
 
       await moveToTabPage(tester: tester, tabName: '設定');
       final Finder settingButton = find.widgetWithIcon(InkWell, Icons.settings);
       expect(settingButton, findsOneWidget);
       await tester.tap(settingButton);
       await tester.pumpAndSettle();
+      final Finder introductionSection = find.ancestor(
+        of: find.text('プロフィール'),
+        matching: find.byType(
+          InkWell,
+        ),
+      );
+      expect(introductionSection, introductionSection);
+      await tester.tap(introductionSection);
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextFormField), 'テストです');
+      final Finder saveButton = find.widgetWithText(TextButton, '保存');
+      await tester.tap(saveButton);
+      await tester.pumpAndSettle();
     });
   });
+}
+
+Future<void> installApp({
+  required WidgetTester tester,
+}) async {
+  app.main();
+  await tester.pumpAndSettle();
 }
 
 Future<void> moveToTabPage({
