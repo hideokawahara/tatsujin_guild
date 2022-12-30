@@ -48,10 +48,21 @@ void main() {
       expect(introductionSection, introductionSection);
       await tester.tap(introductionSection);
       await tester.pumpAndSettle();
-      await tester.enterText(find.byType(TextFormField), 'テストです');
+      const String updateText = 'テストです';
+      await tester.enterText(find.byType(TextFormField), updateText);
       final Finder saveButton = find.widgetWithText(TextButton, '保存');
       await tester.tap(saveButton);
       await tester.pumpAndSettle();
+      final successSaveText = find.text('保存しました');
+      expect(successSaveText, findsOneWidget);
+      final Offset dialogPosition = tester.getCenter(successSaveText);
+      await tester.tapAt(Offset(
+        dialogPosition.dx,
+        dialogPosition.dy - 200,
+      ));
+      await tester.pumpAndSettle();
+      final Finder updateMessage = find.text(updateText);
+      expect(updateMessage.hitTestable(), findsOneWidget);
     });
   });
 }
