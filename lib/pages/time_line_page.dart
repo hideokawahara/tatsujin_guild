@@ -1,7 +1,7 @@
 //Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:modal_bottom_sheet/modal_bottom_sheet.dart'as modalSheet;
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 //Pages
 import 'package:tatsujin_guild/pages/post_page.dart';
@@ -124,15 +124,15 @@ class TimeLinePage extends StatelessWidget {
 
   Future<Map<String, dynamic>?> _showPostsScreen(BuildContext context) async {
     //Todo: 投稿ページを修正する
-    // return await modalSheet.showCupertinoModalBottomSheet(
-    //   context: context,
-    //   useRootNavigator: true,
-    //   builder: (context) => Navigator(
-    //     onGenerateRoute: (context) => MaterialPageRoute<PostPage>(
-    //       builder: (context) => const PostPage(),
-    //     ),
-    //   ),
-    // );
+    return await showCupertinoModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      builder: (context) => Navigator(
+        onGenerateRoute: (context) => MaterialPageRoute<PostPage>(
+          builder: (context) => const PostPage(),
+        ),
+      ),
+    );
   }
 
   Future<void> scrollToTop(ScrollController controller) => controller.animateTo(
