@@ -59,7 +59,9 @@ void main() {
         contents: 'post text',
         likesCounts: 0,
       );
+      verifyNever(mockRepository.postTimeLinePost(post: anyNamed('post')));
       bool result = await timeLineViewModel.createPost(post);
+      verify(mockRepository.postTimeLinePost(post: anyNamed('post')));
       expect(result, true);
     });
   });
