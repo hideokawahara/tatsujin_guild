@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+//Mocks
+import 'home_view_model_test.mocks.dart';
+
 //Models
 import 'package:tatsujin_guild/models/post.dart';
 
@@ -11,9 +14,6 @@ import 'package:tatsujin_guild/repositories/post_repository.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/home_view_model.dart';
-
-//Test
-import 'home_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PostRepositoryImpl>(),

@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+//Mocks
+import 'auth_view_model_test.mocks.dart';
+
 //Models
 import 'package:tatsujin_guild/models/user.dart';
 
@@ -12,9 +15,6 @@ import 'package:tatsujin_guild/repositories/auth_repository.dart';
 
 //ViewModels
 import 'package:tatsujin_guild/view_models/auth_view_model.dart';
-
-//Test
-import 'auth_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthRepositoryImpl>(),

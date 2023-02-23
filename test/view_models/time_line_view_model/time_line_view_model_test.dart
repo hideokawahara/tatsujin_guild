@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-//Models
-import 'package:tatsujin_guild/models/post.dart';
-
 //Mocks
 import 'time_line_view_model_test.mocks.dart';
+
+//Models
+import 'package:tatsujin_guild/models/post.dart';
 
 //Repositories
 import 'package:tatsujin_guild/repositories/post_repository.dart';
