@@ -2,7 +2,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 //Models
-import 'package:tatsujin_guild/models/post.dart';
+import 'package:tatsujin_guild/models/post/post.dart';
 
 //Repositories
 import 'package:tatsujin_guild/repositories/post_repository.dart';

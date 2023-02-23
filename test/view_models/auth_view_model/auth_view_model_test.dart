@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'auth_view_model_test.mocks.dart';
 
 //Models
-import 'package:tatsujin_guild/models/user.dart';
+import 'package:tatsujin_guild/models/user/user.dart';
 
 //Repositories
 import 'package:tatsujin_guild/repositories/auth_repository.dart';

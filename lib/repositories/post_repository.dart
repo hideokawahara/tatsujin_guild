@@ -1,5 +1,5 @@
 //Models
-import 'package:tatsujin_guild/models/post.dart';
+import 'package:tatsujin_guild/models/post/post.dart';
 
 abstract class PostRepository {
   ///ランキングの投稿を取得

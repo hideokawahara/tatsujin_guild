@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 //Models
-import 'package:tatsujin_guild/models/user.dart';
+import 'package:tatsujin_guild/models/user/user.dart';
 
 //Repositories
 import 'package:tatsujin_guild/repositories/auth_repository.dart';

@@ -1,5 +1,5 @@
 //Models
-import 'package:tatsujin_guild/models/user.dart';
+import 'package:tatsujin_guild/models/user/user.dart';
 
 abstract class AuthRepository {
   Future<bool> postLogin({

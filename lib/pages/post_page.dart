@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Models
-import '../models/post.dart';
-import '../models/user.dart';
+import '../models/post/post.dart';
+import '../models/user/user.dart';
 
 //Repositories
 import 'package:tatsujin_guild/repositories/post_repository.dart';
