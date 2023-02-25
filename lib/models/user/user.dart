@@ -1,19 +1,16 @@
-class User {
-  User({
-    required this.name,
-    required this.profileMessage,
-    required this.mainPhoto,
-  });
-  final String name;
-  String profileMessage;
-  //Todo: 将来的にfinalにする
-  String mainPhoto;
+//Packages
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  factory User.fromJSON(Map<String, dynamic> json) {
-    return User(
-      name: json['name'],
-      profileMessage: json['profile_message'],
-      mainPhoto: json['main_photo'],
-    );
-  }
+part 'user.freezed.dart';
+part 'user.g.dart';
+
+@freezed
+class User with _$User {
+  const factory User({
+    required String name,
+    @JsonKey(name: 'profile_message') required String profileMessage,
+    @JsonKey(name: 'main_photo') required String mainPhoto,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

@@ -35,6 +35,7 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<bool> fetchMyData() async {
     User? setMyData = await auth.getMyData();
+    print('here!');
     if (setMyData != null) {
       _myData = setMyData;
       _isLogin = true;
@@ -46,7 +47,8 @@ class AuthViewModel extends ChangeNotifier {
 
   void addMainPhoto(File file) {
     if (_myData != null) {
-      _myData!.mainPhoto = file.path;
+      // _myData!.mainPhoto = file.path;
+      _myData = _myData?.copyWith(mainPhoto: file.path);
       notifyListeners();
     } else {
       return;
@@ -55,7 +57,8 @@ class AuthViewModel extends ChangeNotifier {
 
   void addMessageText(String text) {
     if (_myData != null) {
-      _myData!.profileMessage = text;
+      // _myData!.profileMessage = text;
+      _myData = _myData?.copyWith(profileMessage: text);
       notifyListeners();
     } else {
       return;

@@ -23,7 +23,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<User?> getMyData() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     try {
-      var myData = User.fromJSON(_dummyMyData2);
+      var myData = User.fromJson(_dummyMyData2);
       return myData;
     } catch (e) {
       print('failed my data construct');

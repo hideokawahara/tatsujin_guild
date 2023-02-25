@@ -49,7 +49,7 @@ void main() {
   });
 }
 
-final User testUser = User.fromJSON(
+final User testUser = User.fromJson(
   {
     'name': '達人太郎子',
     'profile_message':

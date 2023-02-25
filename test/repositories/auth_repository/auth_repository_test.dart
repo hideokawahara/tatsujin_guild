@@ -25,7 +25,7 @@ void main() {
   });
 }
 
-final User testUser = User.fromJSON({
+final User testUser = User.fromJson({
   'name': '達人太郎子',
   'profile_message':
       'はじめまして！プロフィールを見て頂きありがとうございます。\n大阪在住の〇〇（名前）といいます。\n結婚を考えていた相手とお別れしたことをきっかけにアプリを始めました！',

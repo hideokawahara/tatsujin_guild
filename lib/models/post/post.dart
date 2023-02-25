@@ -1,21 +1,17 @@
-class Post {
-  Post({
-    required this.authorName,
-    required this.authorImage,
-    required this.contents,
-    required this.likesCounts,
-  });
-  final String authorName;
-  final String authorImage;
-  final String contents;
-  final int likesCounts;
+//Packages
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  factory Post.fromJSON(Map<String, dynamic> json) {
-    return Post(
-      authorName: json['author_name'],
-      authorImage: json['author_image'],
-      contents: json['contents'],
-      likesCounts: json['likes_counts'],
-    );
-  }
+part 'post.freezed.dart';
+part 'post.g.dart';
+
+@freezed
+class Post with _$Post {
+  const factory Post({
+    @JsonKey(name: 'author_name') required String authorName,
+    @JsonKey(name: 'author_image') required String authorImage,
+    required String contents,
+    @JsonKey(name: 'likes_counts') required int likesCounts,
+  }) = _Post;
+
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }
